@@ -1,0 +1,28 @@
+# 매개 변수 값 정의
+name: Android CI
+
+# 어떤 이벤트 워크 플로우가 트리거 될지 지정
+# master, release/* 브랜치 이외를 제외하고 CI를 시작
+on:
+    push:
+        branches:
+            - '*'
+            - '!master'
+            - '!release*'
+
+# 작업 정의
+jobs:
+    # 'Run unit tests' 라는 이름을 가진 'test' job
+    # ncp의 서버는 ubuntu로 돌릴 것
+    test:
+        name: Run unit tests
+        runs-on: ubuntu-18.04
+
+    steps:
+        - uses: actions/checkout@v1
+        - name: set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+            java-version: 1.8
+        - name: Unit tests
+        run: bash ./gradlew test --stacktrace
