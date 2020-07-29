@@ -5,10 +5,13 @@ name: Android CI
 # master, release/* 브랜치 이외를 제외하고 CI를 시작
 on:
     push:
-        branches:
-            - '*'
-            - '!master'
-            - '!release*'
+      branches:
+        - 'feature/cicd'
+        - '!master'
+        - '!release*'
+      pull_request:
+        - develop
+        - master
 
 # 작업 정의
 jobs:
