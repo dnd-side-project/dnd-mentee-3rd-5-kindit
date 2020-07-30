@@ -1,5 +1,7 @@
 ## D&D 3기 - 카인딧(kindit)
-[개발 진행 세부 사항](https://github.com/dnd-mentee-3rd/dnd-mentee-3rd-5-docs/wiki)
+
+### 프로젝트 세부사항
+[Github Wiki](https://github.com/dnd-mentee-3rd/dnd-mentee-3rd-5-kindit/wiki)
 
 
 1. 개발 인원 : 5명
