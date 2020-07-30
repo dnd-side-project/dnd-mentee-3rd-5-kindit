@@ -1,4 +1,4 @@
-## D&D 3기 요거어때
+## D&D 3기 - 카인딧(kindit)
 [개발 진행 세부 사항](https://github.com/dnd-mentee-3rd/dnd-mentee-3rd-5-docs/wiki)
 
 
