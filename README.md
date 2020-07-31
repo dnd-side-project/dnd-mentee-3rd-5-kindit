@@ -8,7 +8,7 @@
 
 |Name|Position|Detail|
 |:---:|---|---|
-|김명석|Developer||
+|김명석|Developer|조장|
 |당현아|Developer||
 |박현채|Developer||
 |백경민|Designer||
