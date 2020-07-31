@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mainItem"
+        android:icon="@android:drawable/ic_menu_help"
+        android:title="메인" />
+    <item
+        android:id="@+id/searchItem"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="검색" />
+    <item
+        android:id="@+id/recommendItem"
+        android:icon="@android:drawable/ic_menu_call"
+        android:title="버튼3" />
+
+    <item
+        android:id="@+id/configItem"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="환경설정" />
+
+</menu>
