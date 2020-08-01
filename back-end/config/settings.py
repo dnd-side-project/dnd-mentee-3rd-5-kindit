@@ -54,6 +54,7 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
+    'knox',
 ]
 
 PROJECT_APPS = [
@@ -73,6 +74,14 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "knox.auth.TokenAuthentication",
+    ),
+}
+
+AUTH_USER_MODEL = 'accounts.User'
 
 TEMPLATES = [
     {
