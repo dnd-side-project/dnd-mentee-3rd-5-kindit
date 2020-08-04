@@ -11,6 +11,7 @@ djangorestframework = "==3.11.0"
 requests = "==2.24.0"
 drf-yasg = "*"
 django-rest-knox = "*"
+django-rest-auth = "*"
 
 [requires]
 python_version = "3.7"

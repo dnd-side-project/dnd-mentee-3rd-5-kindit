@@ -54,7 +54,8 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
-    'knox',
+    'rest_framework.authtoken'
+    # 'knox',
 ]
 
 PROJECT_APPS = [
@@ -75,11 +76,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "knox.auth.TokenAuthentication",
-    ),
-}
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -159,3 +155,20 @@ STATIC_ROOT = os.path.join(BASE_DIR, '.static')
 MEDIA_URL = '/media/' # 업로드 할 경로
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# all-auth
+AUTHENTICATION_BACKENDS = ["accounts.backends.UserBackend"]
+
+#custom user model
+AUTH_USER_MODEL = "accounts.User"
+
+# rest_framework
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly"
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "accounts.backends.TokenAuthBackend"
+    ],
+}
