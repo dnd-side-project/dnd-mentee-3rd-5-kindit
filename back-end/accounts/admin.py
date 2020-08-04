@@ -19,14 +19,14 @@
 # admin.site.unregister(Group)
 
 
-from django.contrib import admin
-from django.contrib.auth import get_user_model
-from django.contrib.auth.admin import UserAdmin
+# from django.contrib import admin
+# from django.contrib.auth import get_user_model
+# from django.contrib.auth.admin import UserAdmin
 
 
 
-class CustomUserAdmin(UserAdmin):
-    UserAdmin.fieldsets[1][1]["fields"]
+# class CustomUserAdmin(UserAdmin):
+#     UserAdmin.fieldsets[1][1]["fields"]
 
 
-admin.site.register(get_user_model(), CustomUserAdmin)
+# admin.site.register(get_user_model(), CustomUserAdmin)

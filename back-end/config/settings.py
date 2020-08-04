@@ -52,10 +52,14 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
+    'django.contrib.sites',
     'drf_yasg',
-    'rest_framework.authtoken'
-    # 'knox',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'rest_auth.registration',
+    'allauth',
+    'allauth.account',
 ]
 
 PROJECT_APPS = [
@@ -63,6 +67,16 @@ PROJECT_APPS = [
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+
+    ]
+}
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,8 +90,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
-
-AUTH_USER_MODEL = 'accounts.User'
 
 TEMPLATES = [
     {
@@ -157,18 +169,13 @@ MEDIA_URL = '/media/' # 업로드 할 경로
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-# all-auth
-AUTHENTICATION_BACKENDS = ["accounts.backends.UserBackend"]
+# Account
 
-#custom user model
-AUTH_USER_MODEL = "accounts.User"
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
 
-# rest_framework
-REST_FRAMEWORK = {
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticatedOrReadOnly"
-    ],
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "accounts.backends.TokenAuthBackend"
-    ],
-}
+# ACCOUNT_USERNAME_REQUIRED = False
+
+ACCOUNT_EMAIL_REQUIRED = True
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+# 'mandatory' : 인증메일 발송, 로그인 불가, 'optional' : 인증메일 발송, 로그인 가능, 'none'
