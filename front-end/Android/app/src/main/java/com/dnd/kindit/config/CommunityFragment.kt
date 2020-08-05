@@ -1,4 +1,4 @@
-package com.dnd.kindit.recommend
+package com.dnd.kindit.config
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.dnd.kindit.R
 
-class RecommendFragment : Fragment() {
+class CommunityFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(R.layout.fragment_recommend,container, false)
+        return inflater.inflate(R.layout.fragment_community,container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

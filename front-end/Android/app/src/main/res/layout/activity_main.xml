@@ -19,18 +19,17 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="54dp"
         android:layout_gravity="bottom"
         android:alpha="0.7"
-        app:itemBackground="@color/cardview_shadow_end_color"
+        app:itemBackground="@color/BottomNavigationView_bg_color"
         app:itemIconSize="24dp"
-        app:itemIconTint="@color/material_on_background_emphasis_high_type"
-        app:itemTextColor="@color/material_on_background_emphasis_medium"
         app:labelVisibilityMode="selected"
         app:layout_behavior="tech.thdev.app.view.BottomNavigationBehavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_bottomnavigation"/>
+        app:layout_constraintTop_toBottomOf="@+id/contentContainer"
+        app:menu="@menu/menu_bottomnavigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
