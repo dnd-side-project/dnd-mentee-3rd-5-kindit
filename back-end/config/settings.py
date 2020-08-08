@@ -73,17 +73,20 @@ INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APP
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.IsAuthenticated',
     ]
 }
 
 SITE_ID = 1
 
-# REST_USE_JWT = True
+REST_USE_JWT = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -216,3 +219,14 @@ EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = 'kinds_eat@naver.com'
 
 EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/'
+
+
+# JWT
+
+from datetime import datetime, timedelta
+
+JWT_AUTH = { 
+    'JWT_ALLOW_REFRESH': True, 
+    'JWT_EXPIRATION_DELTA': timedelta(days=7), 
+    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=28), 
+}
