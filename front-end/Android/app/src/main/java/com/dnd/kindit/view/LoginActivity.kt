@@ -2,26 +2,41 @@ package com.dnd.kindit.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
-import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
+import com.dnd.kindit.MainActivity
 import com.dnd.kindit.R
-import com.dnd.kindit.util.SessionCallback
-import com.kakao.auth.AuthType
-import com.kakao.auth.Session
-import com.kakao.usermgmt.UserManagement
-import com.kakao.usermgmt.callback.LogoutResponseCallback
 import kotlinx.android.synthetic.main.activity_login.*
 
 
 class LoginActivity : AppCompatActivity() {
 
-    private val sessionCallback = SessionCallback()
+//    private val sessionCallback = SessionCallback()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+
+        init()
+
+        initListener()
+    }
+
+    
+    private fun init() { // 데이터 관련 초기화 함수
+
+    }
+    private fun initListener() { // 리스너 초기화 함수
+        login_btn_login.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            finish()
+        }
+    }
+}
+
+/*
         val session = Session.getCurrentSession()
         session.addCallback(sessionCallback)
 
@@ -53,3 +68,5 @@ class LoginActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 }
+
+ */

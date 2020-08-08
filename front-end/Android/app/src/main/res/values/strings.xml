@@ -6,5 +6,12 @@
 
 
     <!-- Launcher Activity Text -->
-    <string name="textview">카인딧에 오신것을 환영합니다!\n여러분만의 레시피를 마음껏 공유해주세요!</string>
+    <string name="lc_tv_info">카인딧에 오신것을 환영합니다!\n여러분만의 레시피를 마음껏 공유해주세요!</string>
+
+
+    <!-- Login Activity Text -->
+    <string name="login_tv_info">카인딧에 오신것을 환영합니다!\n여러분만의 레시피를 마음껏 공유해주세요!</string>
+    <string name="login_tv_sign_up">회원가입</string>
+    <string name="login_btn_login">로그인</string>
+    <string name="login_btn_social">소셜로 로그인</string>
 </resources>

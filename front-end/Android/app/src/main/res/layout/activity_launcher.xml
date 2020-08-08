@@ -24,7 +24,7 @@
         android:id="@+id/lc_tv_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/textview"
+        android:text="@string/lc_tv_info"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
