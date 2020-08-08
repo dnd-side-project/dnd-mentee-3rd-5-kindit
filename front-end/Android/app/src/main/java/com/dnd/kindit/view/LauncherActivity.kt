@@ -18,12 +18,12 @@ class LauncherActivity : AppCompatActivity() {
         // 임시 로딩 시간
         Handler().postDelayed({
             // 추후 LoginActivity로 이동
-//            val intent = Intent(this, LoginActivity::class.java)
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
+//            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
-        }, 200)
+        }, 2200)
     }
     private fun startLoading(){
         

@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Kindit</string>
     <string name="kakao_app_key">f3f24fa18ce3bf5244a9316dbd5bb5fe</string>
+
+
+
+
+    <!-- Launcher Activity Text -->
+    <string name="textview">카인딧에 오신것을 환영합니다!\n여러분만의 레시피를 마음껏 공유해주세요!</string>
 </resources>
