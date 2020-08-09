@@ -1,4 +1,4 @@
-package com.dnd.kindit.view
+package com.dnd.kindit.view.account
 
 import android.content.Intent
 import android.os.Bundle
@@ -22,16 +22,22 @@ class LoginActivity : AppCompatActivity() {
         initListener()
     }
 
-    
+
     private fun init() { // 데이터 관련 초기화 함수
 
     }
+
     private fun initListener() { // 리스너 초기화 함수
+        // 로그인 버튼 눌렀을 경우
         login_btn_login.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, MainActivity::class.java))
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
+        }
+
+        // 회원 가입을 눌렀을 경우
+        login_tv_sign_up.setOnClickListener {
+            startActivity(Intent(this, SignUpActivity::class.java))
         }
     }
 }
