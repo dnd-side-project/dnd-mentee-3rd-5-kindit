@@ -225,7 +225,9 @@ EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/'
 
 from datetime import datetime, timedelta
 
-JWT_AUTH = { 
+JWT_AUTH = {
+    'JWT_SECRET_KEY': get_secret("SECRET_KEY"),
+    'JWT_ALGORITHM': 'HS256', 
     'JWT_ALLOW_REFRESH': True, 
     'JWT_EXPIRATION_DELTA': timedelta(days=7), 
     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=28), 
