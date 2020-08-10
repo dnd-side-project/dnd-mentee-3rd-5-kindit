@@ -7,13 +7,23 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication # JWT�
 from accounts.models import CustomUser as User
 
 
-@api_view(['POST'])
+@api_view(['GET'])
 @permission_classes((IsAuthenticated,))
 @authentication_classes((JSONWebTokenAuthentication,))
 def check_nickname(request):
+    """
+    Params--nickname
+    Returns
+        중복 닉네임 없을 시
+        message : success
+        status : 200
+        중복 닉네임 있을 시
+        message : nickname_exist
+        status : 409
+    """
     try:
-        if User.objects.filter(nickname=request.POST.get('nickname', False)).exists():
-            return JsonResponse({'message':'nickname_exist'}, status=400)
+        if User.objects.filter(nickname=request.GET['nickname']).exists():
+            return JsonResponse({'message':'nickname_exist'}, status=409)
         else:
             return JsonResponse({'message':'success'}, status=200)
     except KeyError:
