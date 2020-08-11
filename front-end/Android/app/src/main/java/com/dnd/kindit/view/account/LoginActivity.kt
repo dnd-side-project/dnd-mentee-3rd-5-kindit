@@ -30,9 +30,7 @@ class LoginActivity : AppCompatActivity() {
     private fun initListener() { // 리스너 초기화 함수
         // 로그인 버튼 눌렀을 경우
         login_btn_login.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-            finish()
+            startActivity(Intent(this, KindItLoginActivity::class.java))
         }
 
         // 회원 가입을 눌렀을 경우
