@@ -8,8 +8,8 @@ from accounts.models import CustomUser as User
 
 
 @api_view(['GET'])
-@permission_classes((IsAuthenticated,))
-@authentication_classes((JSONWebTokenAuthentication,))
+@permission_classes((AllowAny,))
+# @authentication_classes((JSONWebTokenAuthentication,))
 def check_nickname(request):
     """
     Params--nickname
@@ -23,8 +23,14 @@ def check_nickname(request):
     """
     try:
         if User.objects.filter(nickname=request.GET['nickname']).exists():
-            return JsonResponse({'message':'nickname_exist'}, status=409)
+            return JsonResponse({
+                'result': 'fail',
+                'message': '이미 존재하는 닉네임입니다.'
+            }, status=409)
         else:
-            return JsonResponse({'message':'success'}, status=200)
+            return JsonResponse({
+                'result':'success',
+                'message': '사용 가능한 닉네임입니다.'
+            }, status=200)
     except KeyError:
-        return JsonResponse({'message':'INVALID_KEY'})
+        return JsonResponse({'result':'INVALID_KEY'})
