@@ -5,29 +5,43 @@
     android:id="@+id/lc_cl_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:backgroundTint="#FFFFFF"
     tools:context=".view.LauncherActivity">
-
-    <ImageView
-        android:id="@+id/lc_iv_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="로고 이미지"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.417"
-        app:srcCompat="@android:drawable/star_big_on" />
 
     <TextView
         android:id="@+id/lc_tv_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lc_tv_info"
+        android:layout_marginBottom="32dp"
+        android:elevation="1dp"
         android:gravity="center"
+        android:text="@string/lc_tv_info"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ic_iv_bottom"
+        android:layout_width="430dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lc_iv_logo" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/kindit_launcher"
+        tools:srcCompat="@drawable/kindit_launcher" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ic_iv_bottom"
+        app:srcCompat="@drawable/kindit_logo" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
