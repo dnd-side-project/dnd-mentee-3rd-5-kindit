@@ -8,15 +8,17 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny # 로그인 여부
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication # JWT인증
-from accounts.models import CustomUser as User
+from .models import CustomUser as User
 from rest_framework.views import APIView, View
-from accounts.serializers import UserCreateSerializer
+from rest_framework.response import Response
+from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView
+from .serializers import UserCreateSerializer, UserLoginSerializer, UserSerializer, UserDeleteSerializer
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
-from accounts.helper import send_mail
+from .helper import send_mail
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_text
@@ -24,10 +26,11 @@ from config.settings import get_secret
 from django.http import HttpResponse
 from pytz import timezone
 from datetime import datetime, timedelta
+from django.contrib.auth import get_user_model
 
 
 @api_view(['GET'])
-@permission_classes((AllowAny,))
+@permission_classes([AllowAny])
 # @authentication_classes((JSONWebTokenAuthentication,))
 def check_nickname(request):
     try:
@@ -45,7 +48,7 @@ def check_nickname(request):
         return JsonResponse({'result':'INVALID_KEY'})
 
 
-@method_decorator(csrf_exempt, name='dispatch')
+# @method_decorator(csrf_exempt, name='dispatch')
 class SignUpView(View):
     def post(self, request):
         email = request.POST.get('email','')
@@ -59,7 +62,13 @@ class SignUpView(View):
                     'result': 'fail',
                     'message': '이미 등록된 이메일 계정입니다.'
                 }, status=status.HTTP_400_BAD_REQUEST)
-            
+
+            if not email or not nickname or not password1 or not password2:
+                return JsonResponse({
+                    'result': 'fail',
+                    'message': '모든 항목을 입력해주세요.'
+                }, status=status.HTTP_400_BAD_REQUEST)
+
             if password1 != password2:
                 return JsonResponse({
                     'result': 'fail',
@@ -118,3 +127,110 @@ def confirm_email_view(request, token):
     except jwt.ExpiredSignatureError:
         return render(request, 'accounts/register_fail.html')
 
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def login_view(request):
+    if request.method == 'POST':
+        serializer = UserLoginSerializer(data=request.data)
+
+        if not serializer.is_valid(raise_exception=True):
+            return JsonResponse({
+                'result': 'fail',
+                'message': 'Valid Error'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        if serializer.validated_data['email'] == "None":
+            return JsonResponse({
+                'result': 'fail',
+                'message': '입력하신 정보와 일치하는 계정이 없습니다.'
+            }, status=status.HTTP_200_OK)
+
+        return JsonResponse({
+            'result': 'success',
+            'message': '로그인 성공.',
+            'user': {
+                'token': serializer.data['token'],
+                'email': serializer.data['email'],
+                'nickname': serializer.data['nickname']
+            }
+        }, status=status.HTTP_200_OK)
+
+
+class UserAPIView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self):
+        return self.request.user
+
+    def get_queryset(self):
+        return get_user_model().objects.none()
+
+    def get(self, request, *args, **kwargs):
+        snippet = self.get_object()
+        serializer = UserSerializer(snippet)
+        return JsonResponse({
+            'result': 'success',
+            'message': '회원님의 프로필은 다음과 같습니다.',
+            'user': {
+                'email': serializer.data['email'],
+                'nickname': serializer.data['nickname'],
+                'date_joined': serializer.data['date_joined']
+            }
+        }, status=status.HTTP_200_OK)
+
+    def patch(self, request, *args, **kwargs):
+        snippet = self.get_object()
+        serializer = UserSerializer(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse({
+                'result': 'success',
+                'message': '프로필이 수정되었습니다.',
+                'user': {
+                    'email': serializer.data['email'],
+                    'nickname': serializer.data['nickname'],
+                    'date_joined': serializer.data['date_joined']
+                }
+            }, status=status.HTTP_200_OK)
+        return JsonResponse({
+                'result': 'fail',
+                'message': serializer.errors,
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, *args, **kwargs):
+        snippet = self.get_object()
+        data = {}
+        password = request.POST.get('password','')
+        data['email'] = snippet.email
+        data['password'] = password
+        serializer = UserDeleteSerializer(data=data)
+
+        if not serializer.is_valid(raise_exception=True):
+            return JsonResponse({
+                'result': 'fail',
+                'message': 'Valid Error'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        if serializer.validated_data['email'] == "None":
+            return JsonResponse({
+                'result': 'fail',
+                'message': '비밀번호가 일치하지 않습니다.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        snippet.delete()
+        return JsonResponse({
+            'result': 'success',
+            'message': '회원탈퇴가 완료되었습니다.',
+        }, status=status.HTTP_204_NO_CONTENT)
+   
+
+    # def patch(self, request):
+    #     profile = request.user.profile
+    #     serializer = UserSerializer(profile, data=request.data, context={"request": request})
+
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return JsonResponse(serializer.data, status.HTTP_202_ACCEPTED)
+
+    #     return JsonResponse("Update failed!", status.HTTP_400_BAD_REQUEST)

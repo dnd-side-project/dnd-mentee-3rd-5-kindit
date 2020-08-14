@@ -13,8 +13,11 @@ urlpatterns = [
     path('jwt-auth/', obtain_jwt_token),          # JWT 토큰 획득
     path('jwt-auth/refresh/', refresh_jwt_token), # JWT 토큰 갱신
     path('jwt-auth/verify/', verify_jwt_token),   # JWT 토큰 확인
-    path('auth/check-nickname/', views.check_nickname, name='check_nickname'),
 
+    path('check-nickname/', views.check_nickname, name='check_nickname'),
     path('registration/', views.SignUpView.as_view(), name='registration'),
     path('confirm-email/<str:token>/', views.confirm_email_view, name='activate'),
+    path('login/', views.login_view, name='login'),
+    path('user/', views.UserAPIView.as_view(), name='user'),
+    
 ]
