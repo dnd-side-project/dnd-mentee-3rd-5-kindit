@@ -9,7 +9,7 @@ class CustomUserAdmin(admin.ModelAdmin):
     list_display = (
         'email',
         'nickname',
-        'birthday'
+        'registered_date'
     )
 
     search_fields = (
