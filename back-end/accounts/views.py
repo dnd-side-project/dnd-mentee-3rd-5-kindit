@@ -48,13 +48,12 @@ def check_nickname(request):
         return JsonResponse({'result':'INVALID_KEY'})
 
 
-# @method_decorator(csrf_exempt, name='dispatch')
 class SignUpView(View):
     def post(self, request):
-        email = request.POST.get('email','')
-        nickname = request.POST.get('nickname','')
-        password1 = request.POST.get('password1','')
-        password2 = request.POST.get('password2','')
+        email = json.loads(request.body)['email']
+        nickname = json.loads(request.body)['nickname']
+        password1 = json.loads(request.body)['password1']
+        password2 = json.loads(request.body)['password2']
         try:
             validate_email(email)
             if User.objects.filter(email=email).exists():
@@ -74,11 +73,7 @@ class SignUpView(View):
                     'result': 'fail',
                     'message': '비밀번호가 일치하지 않습니다.'
                 }, status=status.HTTP_400_BAD_REQUEST)
-            # user = User.objects.create(
-            #     email     = data["email"],
-            #     password  = bcrypt.hashpw(data["password"].encode("UTF-8"), bcrypt.gensalt()).decode("UTF-8"),
-            #     is_active = False 
-            # )
+
             token = jwt.encode({
                 'email': email,
                 'nickname': nickname,
@@ -132,7 +127,7 @@ def confirm_email_view(request, token):
 @permission_classes([AllowAny])
 def login_view(request):
     if request.method == 'POST':
-        serializer = UserLoginSerializer(data=request.data)
+        serializer = UserLoginSerializer(data=json.loads(request.body))
 
         if not serializer.is_valid(raise_exception=True):
             return JsonResponse({
@@ -144,7 +139,7 @@ def login_view(request):
             return JsonResponse({
                 'result': 'fail',
                 'message': '입력하신 정보와 일치하는 계정이 없습니다.'
-            }, status=status.HTTP_200_OK)
+            }, status=status.HTTP_400_BAD_REQUEST)
 
         return JsonResponse({
             'result': 'success',
@@ -181,7 +176,7 @@ class UserAPIView(APIView):
 
     def patch(self, request, *args, **kwargs):
         snippet = self.get_object()
-        serializer = UserSerializer(snippet, data=request.data)
+        serializer = UserSerializer(snippet, data=json.loads(request.body))
         if serializer.is_valid():
             serializer.save()
             return JsonResponse({
@@ -201,7 +196,7 @@ class UserAPIView(APIView):
     def delete(self, request, *args, **kwargs):
         snippet = self.get_object()
         data = {}
-        password = request.POST.get('password','')
+        password = json.loads(request.body)['password']
         data['email'] = snippet.email
         data['password'] = password
         serializer = UserDeleteSerializer(data=data)
@@ -223,14 +218,3 @@ class UserAPIView(APIView):
             'result': 'success',
             'message': '회원탈퇴가 완료되었습니다.',
         }, status=status.HTTP_204_NO_CONTENT)
-   
-
-    # def patch(self, request):
-    #     profile = request.user.profile
-    #     serializer = UserSerializer(profile, data=request.data, context={"request": request})
-
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return JsonResponse(serializer.data, status.HTTP_202_ACCEPTED)
-
-    #     return JsonResponse("Update failed!", status.HTTP_400_BAD_REQUEST)
