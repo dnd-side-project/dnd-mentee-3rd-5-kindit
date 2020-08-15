@@ -26,5 +26,5 @@
     <string name="su_btn_nickname_valid">중복 확인</string>
     <string name="su_tv_pass1">비밀번호</string>
     <string name="su_tv_pass2">비밀번호 확인</string>
-    <string name="su_btn_req_sign">가입 요청</string>
+    <string name="su_btn_req_sign">회원가입 요청</string>
 </resources>
