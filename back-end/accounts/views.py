@@ -12,7 +12,7 @@ from .models import CustomUser as User
 from rest_framework.views import APIView, View
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView
-from .serializers import UserCreateSerializer, UserLoginSerializer, UserSerializer, UserDeleteSerializer
+from .serializers import UserCreateSerializer, UserLoginSerializer, UserSerializer, UserDeleteSerializer, PasswordChangeSerializer
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.views.decorators.csrf import csrf_exempt
@@ -280,3 +280,29 @@ def confirm_password_reset_view(request, token):
 
     except jwt.ExpiredSignatureError:
         return render(request, 'accounts/token_fail.html')
+
+
+class PasswordChangeView(GenericAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = PasswordChangeSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=json.loads(request.body))
+        serializer.is_valid(raise_exception=True)
+        
+        if serializer.validated_data['error'] == 'old_password':
+            return JsonResponse({
+                'result': 'fail',
+                'message': '이전 비밀번호가 일치하지 않습니다.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        if serializer.validated_data['error'] == 'new_password':
+            return JsonResponse({
+                'result': 'fail',
+                'message': '입력하신 새 비밀번호가 일치하지 않습니다.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        serializer.save(data=json.loads(request.body))
+        return JsonResponse({
+            'result': 'success',
+            'message': '비밀번호가 변경되었습니다. 다시 로그인 해주세요.',
+        }, status=status.HTTP_200_OK)
