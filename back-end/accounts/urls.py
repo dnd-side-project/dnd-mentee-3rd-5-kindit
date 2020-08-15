@@ -19,5 +19,6 @@ urlpatterns = [
     path('confirm-email/<str:token>/', views.confirm_email_view, name='activate'),
     path('login/', views.login_view, name='login'),
     path('user/', views.UserAPIView.as_view(), name='user'),
-    
+    path('password-reset/', views.PasswordResetView.as_view(), name='password-reset'),
+    path('confirm_password_reset/<str:token>/', views.confirm_password_reset_view, name='password-reset-activate'),
 ]

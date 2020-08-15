@@ -2,7 +2,7 @@ import requests
 import bcrypt
 import jwt
 import json
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
@@ -18,7 +18,7 @@ from django.core.validators import validate_email
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
-from .helper import send_mail
+from .helper import send_mail, reset_password
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_text
@@ -82,7 +82,7 @@ class SignUpView(View):
             }, get_secret("SECRET_KEY"), algorithm = 'HS256').decode('utf-8')
             
             send_mail(
-                '[카인딧:KINDIT] {} 님의 회원가입 인증메일 입니다.'.format(nickname),
+                '[카인딧:KINDIT] {}님의 회원가입 인증메일 입니다.'.format(nickname),
                 [email],
                 html=render_to_string('accounts/confirm_email.html', {
                     'token': token,
@@ -120,7 +120,7 @@ def confirm_email_view(request, token):
         return render(request, 'accounts/register_success.html')
 
     except jwt.ExpiredSignatureError:
-        return render(request, 'accounts/register_fail.html')
+        return render(request, 'accounts/token_fail.html')
 
 
 @api_view(['POST'])
@@ -218,3 +218,65 @@ class UserAPIView(APIView):
             'result': 'success',
             'message': '회원탈퇴가 완료되었습니다.',
         }, status=status.HTTP_204_NO_CONTENT)
+
+
+class PasswordResetView(APIView):
+    permission_classes = (AllowAny,)
+
+    def post(self, request):
+        email = json.loads(request.body)['email']
+        try:
+            validate_email(email)
+            if not User.objects.filter(email=email).exists():
+                return JsonResponse({
+                    'result': 'fail',
+                    'message': '입력하신 정보와 일치하는 계정이 없습니다.'
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+            nickname = User.objects.get(email=email).nickname
+            token = jwt.encode({
+                'email': email,
+                'password': reset_password(),
+                'exp': datetime.now(timezone('Asia/Seoul')) + timedelta(minutes=10),
+            }, get_secret("SECRET_KEY"), algorithm = 'HS256').decode('utf-8')
+            
+            send_mail(
+                '[카인딧:KINDIT] {}님의 비밀번호 초기화 인증 메일입니다.'.format(nickname),
+                [email],
+                html=render_to_string('accounts/password_reset.html', {
+                    'token': token,
+                    'domain': self.request.META['HTTP_HOST'],
+                }),
+            )
+            return JsonResponse({
+                'result': 'success',
+                'message': '입력하신 메일로 비밀번호 초기화 메일을 발송했습니다.'
+            }, status=status.HTTP_200_OK)
+
+        except KeyError:
+            return JsonResponse({
+                'result': 'fail',
+                'message': '이메일을 입력해주세요.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        except TypeError:
+            return JsonResponse({
+                'result': 'fail',
+                'message': 'INVALID_TYPE'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        except ValidationError:
+            return JsonResponse({
+                'result': 'fail',
+                'message': '올바른 형식의 이메일을 입력해주세요.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+
+def confirm_password_reset_view(request, token):
+    try:
+        data = jwt.decode(token, get_secret("SECRET_KEY"), alghrithm='HS256')
+        user = User.objects.get(email=data['email'])
+        user.set_password(data['password'])
+        user.save()
+        return render(request, 'accounts/password_reset_success.html', context={'data':data['password']})
+
+    except jwt.ExpiredSignatureError:
+        return render(request, 'accounts/token_fail.html')

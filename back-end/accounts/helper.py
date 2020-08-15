@@ -22,3 +22,12 @@ class EmailThread(threading.Thread):
 
 def send_mail(subject, recipient_list, body='', from_email='kinds_eat@naver.com', fail_silently=False, html=None, *args, **kwargs):
     EmailThread(subject, body, from_email, recipient_list, fail_silently, html).start()
+
+
+def reset_password():
+    LENGTH = 6
+    string_pool = string.ascii_letters + string.digits
+    reset_password = ""
+    for i in range(LENGTH):
+        reset_password += random.choice(string_pool)
+    return reset_password
