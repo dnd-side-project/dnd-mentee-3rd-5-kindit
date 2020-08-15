@@ -9,13 +9,13 @@
 
     <ImageView
         android:id="@+id/su_img_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="35dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/round_keyboard_arrow_left_black_36dp" />
+        app:srcCompat="@drawable/back" />
 
     <TextView
         android:id="@+id/su_tv_sign_up"
@@ -24,6 +24,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="32dp"
         android:text="@string/su_tv_sign_up"
+        android:textColor="#000000"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/su_img_back" />
@@ -38,120 +39,131 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/su_tv_sign_up" />
 
-    <TextView
-        android:id="@+id/su_tv_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/su_tv_email"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
-
-    <EditText
-        android:id="@+id/su_edt_email"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/su_edtl_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/kinditMainColor1"
         android:ems="10"
         android:hint="@string/su_edt_email"
-        android:maxLines="1"
-        android:inputType="text"
+        android:textColorHint="@color/kinditMainColor1"
+        app:helperTextTextColor="@color/kinditMainColor1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/su_tv_email"
-        tools:ignore="TextFields" />
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        tools:ignore="TextFields">
 
-    <TextView
-        android:id="@+id/su_tv_nickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/su_tv_nickname"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/su_edt_email" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/su_edt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/kinditMainColor1"
+            android:inputType="text"
+            android:maxLines="1"
+            android:text="msno2@naver.com"/>
 
-    <EditText
-        android:id="@+id/su_edt_nickname"
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/su_edtl_nickname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/kinditMainColor1"
+        android:textColorHint="@color/kinditMainColor1"
+        app:helperTextTextColor="@color/kinditMainColor1"
         android:ems="10"
         android:hint="@string/su_edt_nickname"
-        android:maxLines="1"
-        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/su_tv_nickname" />
+        app:layout_constraintTop_toBottomOf="@+id/su_edtl_email">
 
-    <Button
-        android:id="@+id/su_btn_nickname_valid"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:text="@string/su_btn_nickname_valid"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/su_edt_nickname" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/su_edt_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/kinditMainColor1"
+            android:inputType="text"
+            android:maxLines="1"
+            android:text="msno2"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/su_tv_pass1"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/su_edtl_pass1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="32dp"
         android:text="@string/su_tv_pass1"
         android:textSize="12sp"
+        android:backgroundTint="@color/kinditMainColor1"
+        android:textColorHint="@color/kinditMainColor1"
+        app:helperTextTextColor="@color/kinditMainColor1"
+        android:ems="10"
+        android:hint="@string/su_tv_pass1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/su_btn_nickname_valid" />
+        app:layout_constraintTop_toBottomOf="@+id/su_edtl_nickname"
+        app:endIconMode="password_toggle">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/su_edt_pass1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/kinditMainColor1"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:text="msno2"
+        />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/su_tv_pass2"
-        android:layout_width="wrap_content"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/su_edtl_pass2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/kinditMainColor1"
+        android:ems="10"
+        android:hint="@string/su_tv_pass2"
         android:text="@string/su_tv_pass2"
+        android:textColorHint="@color/kinditMainColor1"
         android:textSize="12sp"
+        app:endIconMode="password_toggle"
+        app:helperTextTextColor="@color/kinditMainColor1"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/su_edt_pass1" />
+        app:layout_constraintTop_toBottomOf="@+id/su_edtl_pass1">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/su_edt_pass2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/kinditMainColor1"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:text="msno2" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/su_btn_req_sign"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/login_button"
         android:text="@string/su_btn_req_sign"
+        android:textColor="#FFFFFF"
+        android:textSize="23sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/su_edt_pass1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/su_tv_pass1" />
-
-    <EditText
-        android:id="@+id/su_edt_pass2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/su_tv_pass2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

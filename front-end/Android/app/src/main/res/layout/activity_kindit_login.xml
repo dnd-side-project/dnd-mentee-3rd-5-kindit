@@ -4,17 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/kinditMainColor1"
     tools:context=".view.account.KindItLoginActivity">
 
     <ImageView
         android:id="@+id/su_img_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="35dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/round_keyboard_arrow_left_black_36dp" />
+        app:srcCompat="@drawable/back" />
 
     <TextView
         android:id="@+id/textView8"
@@ -22,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:text="이메일 찾기"
+        android:textColor="@color/kinditMainColor1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textView7"
         app:layout_constraintHorizontal_bias="0.5"
@@ -32,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="비밀번호 찾기"
+        android:textColor="@color/kinditMainColor1"
         app:layout_constraintBottom_toBottomOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -39,25 +42,18 @@
         app:layout_constraintTop_toTopOf="@+id/textView8"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:text="혹시 로그인 정보를 잊으셨나요?"
-        app:layout_constraintBottom_toTopOf="@+id/textView8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <Button
         android:id="@+id/button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="24dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/login_button"
         android:text="로그인"
-        app:layout_constraintBottom_toTopOf="@+id/textView9"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -68,10 +64,14 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/kinditMainColor1"
         android:ems="10"
-        android:maxLines="1"
-        android:inputType="text"
         android:hint="Password"
+        android:inputType="text"
+        android:maxLines="1"
+        android:shadowColor="@color/kinditMainColor1"
+        android:textColorHighlight="@color/kinditMainColor1"
+        android:textColorLink="@color/kinditMainColor1"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -82,6 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="비밀번호"
+        android:textColor="@color/kinditMainColor1"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
         app:layout_constraintStart_toStartOf="parent" />
@@ -93,10 +94,11 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/kinditMainColor1"
         android:ems="10"
-        android:maxLines="1"
-        android:inputType="text"
         android:hint="Email"
+        android:inputType="text"
+        android:maxLines="1"
         app:layout_constraintBottom_toTopOf="@+id/textView10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -107,6 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="이메일"
+        android:textColor="@color/kinditMainColor1"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName2"
         app:layout_constraintStart_toStartOf="parent" />
@@ -118,8 +121,20 @@
         android:layout_marginStart="10dp"
         android:layout_marginBottom="32dp"
         android:text="로그인"
+        android:textColor="#000000"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView11"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="120dp"
+        android:layout_height="140dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/su_img_back"
+        app:srcCompat="@drawable/kindit_logo2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
