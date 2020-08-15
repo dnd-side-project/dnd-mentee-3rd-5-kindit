@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.dnd.kindit.R
+import com.dnd.kindit.view.account.KindItLoginActivity
 import com.dnd.kindit.view.account.LoginActivity
 
 class LauncherActivity : AppCompatActivity() {
@@ -16,17 +17,20 @@ class LauncherActivity : AppCompatActivity() {
 //        startLoading()
 
         // 임시 로딩 시간
+        loading()
+    }
+    private fun startLoading(){
+        
+    }
+
+    private fun loading(){
         Handler().postDelayed({
             // 추후 LoginActivity 로 이동
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, KindItLoginActivity::class.java)
 //            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
         }, 100)
     }
-    private fun startLoading(){
-        
-    }
-
 }

@@ -5,8 +5,7 @@
     android:id="@+id/lc_cl_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:backgroundTint="#FFFFFF"
+    android:background="@drawable/kindit_launcher"
     tools:context=".view.LauncherActivity">
 
     <TextView
@@ -24,24 +23,13 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/ic_iv_bottom"
-        android:layout_width="430dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/kindit_launcher"
-        tools:srcCompat="@drawable/kindit_launcher" />
-
-    <ImageView
         android:id="@+id/imageView4"
         android:layout_width="300dp"
         android:layout_height="300dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ic_iv_bottom"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/kindit_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
