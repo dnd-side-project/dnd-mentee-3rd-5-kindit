@@ -1,13 +1,12 @@
 package com.dnd.kindit.view
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import androidx.appcompat.app.AppCompatActivity
 import com.dnd.kindit.R
 import com.dnd.kindit.view.account.KindItLoginActivity
 import com.dnd.kindit.view.account.LoginActivity
-import com.dnd.kindit.view.account.SignUpActivity
 
 class LauncherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +27,7 @@ class LauncherActivity : AppCompatActivity() {
     private fun loading() {
         Handler().postDelayed({
             // 추후 LoginActivity 로 이동
-            val intent = Intent(this, KindItLoginActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
 //            val intent = Intent(this, MainActivity::class.java)
 //            val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)

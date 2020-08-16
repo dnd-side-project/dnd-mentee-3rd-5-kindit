@@ -10,4 +10,5 @@
     <color name="BottomNavigationView_icon_color">#212121</color>
 
     <!-- Kindit's Color-->
+    <color name="inputTextBoxColor">#F3F3F3</color>
 </resources>
