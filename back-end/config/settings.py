@@ -63,10 +63,12 @@ THIRD_PARTY_APP = [
     # 'rest_auth.registration',
     # 'allauth',
     # 'allauth.account',
+    'taggit',
 ]
 
 PROJECT_APPS = [
     'accounts.apps.AccountsConfig',
+    'menu.apps.MenuConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APP
