@@ -304,5 +304,5 @@ class PasswordChangeView(GenericAPIView):
         serializer.save(data=json.loads(request.body))
         return JsonResponse({
             'result': 'success',
-            'message': '비밀번호가 변경되었습니다. 다시 로그인 해주세요.',
+            'message': '비밀번호가 변경되었습니다. 변경하신 비밀번호로 다시 로그인 해주세요.',
         }, status=status.HTTP_200_OK)

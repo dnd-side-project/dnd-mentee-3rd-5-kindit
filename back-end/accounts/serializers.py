@@ -91,11 +91,8 @@ class PasswordChangeSerializer(serializers.Serializer):
     new_password1 = serializers.CharField(max_length=128)
     new_password2 = serializers.CharField(max_length=128)
 
-    # set_password_form_class = SetPasswordForm
     def __init__(self, *args, **kwargs):
-        
         super(PasswordChangeSerializer, self).__init__(*args, **kwargs)
-
         self.request = self.context.get('request')
         self.user = getattr(self.request, 'user', None)
 
@@ -108,7 +105,6 @@ class PasswordChangeSerializer(serializers.Serializer):
             return {'error': 'old_password'}
         elif data['new_password1'] != data['new_password2']:
             return {'error': 'new_password'}
-
         return {'error': 'success'}
 
     def save(self, data):

@@ -35,3 +35,16 @@
 #             return Response(data=data, status=res_code)
 
 #     return _wrapper
+
+from rest_framework.views import exception_handler
+
+
+def custom_exception_handler(exc, context):
+    response = exception_handler(exc, context)
+    if response is not None:
+        # temp_dict = {}
+        # temp_dict.update({'result':'fail'})
+        # response.data = {**temp_dict, **response.data}
+        response.data['result'] = 'fail'
+        response.data['message'] = response.data.pop('detail')
+    return response
