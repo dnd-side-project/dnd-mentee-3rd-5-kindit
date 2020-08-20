@@ -2,17 +2,8 @@ from django.urls import path, include
 from django.conf.urls import url
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from config.api_urls import urlpatterns
-from rest_framework.permissions import (
-    AllowAny,
-    IsAuthenticated,
-    BasePermission
-)
+from rest_framework.permissions import AllowAny, IsAuthenticated, BasePermission
 
-
-schema_url_patterns = [
-    path('api/', include(urlpatterns)),
-]
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -27,10 +18,8 @@ schema_view = get_schema_view(
     public=True,
     permission_classes=(
         AllowAny,
-    ),
-    patterns=schema_url_patterns,
+    )
 )
-
 
 app_name = "api"
 

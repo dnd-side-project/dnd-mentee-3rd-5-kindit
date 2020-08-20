@@ -58,11 +58,6 @@ DJANGO_APPS = [
 THIRD_PARTY_APP = [
     'drf_yasg',
     'rest_framework',
-    'rest_framework.authtoken',
-    # 'rest_auth',
-    # 'rest_auth.registration',
-    # 'allauth',
-    # 'allauth.account',
     'taggit',
 ]
 
@@ -76,13 +71,13 @@ INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APP
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        # 'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
         'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
         # 'rest_framework.permissions.AllowAny',
     ],
     'EXCEPTION_HANDLER': 'config.utils.custom_exception_handler'
@@ -185,32 +180,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #Account
 
-# AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
-    # 'django.contrib.auth.backends.ModelBackend',
-    # `allauth` specific authentication methods, such as login by e-mail
-    # 'allauth.account.auth_backends.AuthenticationBackend',
-# ]
-
-# REST_AUTH_SERIALIZERS = {
-    # 'USER_DETAILS_SERIALIZER': 'accounts.serializers.UserSerializer',
-# }
-
 AUTH_USER_MODEL = 'accounts.CustomUser'
-# LOGIN_URL = '/api/accounts/auth/login/'
-
-# ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-# ACCOUNT_EMAIL_REQUIRED = True
-# ACCOUNT_USERNAME_REQUIRED = False
-# ACCOUNT_AUTHENTICATION_METHOD = 'email'
-# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-# ACCOUNT_UNIQUE_EMAIL = True
-# ACCOUNT_LOGOUT_ON_GET = False # False: LOGOUT POST만 허용
-# ACCOUNT_CONFIRM_EMAIL_ON_GET = True
-# ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = False # True: 이메일인증 링크를 누르면 자동 로그인
-# ACCOUNT_EMAIL_SUBJECT_PREFIX = '[카인딧:KINDIT]'
-# ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = LOGIN_URL
-# ACCOUNT_LOGOUT_ON_GET = True
 
 
 # SMTP
@@ -222,8 +192,6 @@ EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = 'kinds_eat@naver.com'
-
-# EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/'
 
 
 # JWT

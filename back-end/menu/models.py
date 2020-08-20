@@ -5,6 +5,7 @@ from django.utils import timezone
 from datetime import datetime, timedelta
 from uuid import uuid4
 from taggit.managers import TaggableManager
+from menu.choice import BRAND_CHOICES
 
 
 def get_image_path(instance, filename):
@@ -15,14 +16,14 @@ def get_image_path(instance, filename):
 
 class Menu(models.Model):
     writer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, verbose_name='작성자')
-    brand = models.CharField(max_length=64, verbose_name='브랜드')
+    brand = models.CharField(choices=BRAND_CHOICES, null=True, max_length=64, verbose_name='브랜드')
     title = models.CharField(max_length=64, verbose_name='커스텀메뉴')
     base_menu = models.CharField(max_length=64, verbose_name='원본메뉴')
     ingredient = models.CharField(max_length=64, verbose_name='재료')
     price = models.PositiveIntegerField(verbose_name='가격', default='0')
     tip = models.TextField(verbose_name='팁')
     rating = models.DecimalField(max_digits=5, decimal_places=1, verbose_name='평점', default=0.0)
-    likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='likes', verbose_name='추천', blank=True)
+    likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='likes', verbose_name='찜', blank=True)
     hits = models.PositiveIntegerField(verbose_name='조회수', default=0)
     comments = models.PositiveIntegerField(verbose_name='댓글수', default='0')
     upload_image = models.ImageField(upload_to=get_image_path, null=True, blank=True, verbose_name='이미지파일')
@@ -34,7 +35,7 @@ class Menu(models.Model):
 
     def __str__(self):
         return '%s - %s' % (self.brand, self.title)
-
+ 
     def upload_image_delete(self, *args, **kargs):
         if self.upload_image:
             os.remove(os.path.join(settings.MEDIA_ROOT, self.upload_image.path))
