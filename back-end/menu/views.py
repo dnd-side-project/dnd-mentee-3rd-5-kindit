@@ -11,5 +11,15 @@ from rest_framework.permissions import IsAuthenticated, AllowAny # 로그인 여
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication # JWT인증
 
 
-def hello(request):
-    pass
+class MenuListView(APIView):
+    def post(self, request, format=None):
+        serializer = MenuSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self, request, format=None):
+        queryset = Menu.objects.all()
+        serializer = MenuSerializer(queryset, many=True)
+        return Response(serializer.data)
