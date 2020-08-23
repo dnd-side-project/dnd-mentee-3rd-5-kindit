@@ -26,4 +26,8 @@
     <string name="email">Email</string>
     <string name="fd_btn_send">메일 발송</string>
     <string name="fp_tv_info">입력하신 이메일로 임시비밀번호를 발송해 드렸습니다.\n로그인 후 비밀번호를 변경해 주세요.</string>
+    <string name="fit_tv_info1">카인딧에 오신것을 환영합니다!</string>
+    <string name="fit_tv_info2">저희는 당신의 취향이 알고 싶어요!\n관심있는 키워드를 선택해 주세요 :)</string>
+    <string name="fit_btn_ok">완료</string>
+    <string name="ct_tv_item">서브웨이</string>
 </resources>
