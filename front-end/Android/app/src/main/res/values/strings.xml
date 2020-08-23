@@ -24,4 +24,6 @@
     <string name="kl_tv_find_password">비밀번호 찾기</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="fd_btn_send">메일 발송</string>
+    <string name="fp_tv_info">입력하신 이메일로 임시비밀번호를 발송해 드렸습니다.\n로그인 후 비밀번호를 변경해 주세요.</string>
 </resources>

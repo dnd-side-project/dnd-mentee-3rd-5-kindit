@@ -101,7 +101,7 @@ class SignUpActivity : AppCompatActivity() {
         su_btn_req_sign.setOnClickListener {
             if(validationCheck.checkAllValidation()){
                 val signUpDto = UserSignUpRequest(
-                    su_edt_email.text.toString(),
+                    fp_edt_email.text.toString(),
                     su_edt_nickname.text.toString(),
                     su_edt_pass1.text.toString(),
                     su_edt_pass2.text.toString()
@@ -132,7 +132,7 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         // 이메일 부분 변경시
-        su_edt_email.addTextChangedListener(object:TextWatcher{
+        fp_edt_email.addTextChangedListener(object:TextWatcher{
             override fun afterTextChanged(p0: Editable?) {
             }
 
@@ -140,11 +140,11 @@ class SignUpActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if(validationCheck.checkEmailRegex(su_edt_email.text.toString())){
-                    su_edtl_email.helperText = "유효한 이메일 입니다."
+                if(validationCheck.checkEmailRegex(fp_edt_email.text.toString())){
+                    fp_edtl_email.helperText = "유효한 이메일 입니다."
                     validationCheck.changeEmail = true
                 }else{
-                    su_edtl_email.helperText = "이메일 형식이 맞지 않습니다."
+                    fp_edtl_email.helperText = "이메일 형식이 맞지 않습니다."
                     validationCheck.changeEmail = false
                 }
             }

@@ -43,6 +43,12 @@ class KindItLoginActivity : AppCompatActivity() {
             finish()
         }
 
+        // 비밀번호 찾기 클릭 리스너
+        kl_tv_find_password.setOnClickListener {
+            startActivity(Intent(applicationContext, FindPasswordActivity::class.java))
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+        }
+
         // 로그인 버튼 클릭 리스너
         kl_btn_login.setOnClickListener {
 
@@ -76,7 +82,6 @@ class KindItLoginActivity : AppCompatActivity() {
                             Toast.makeText(applicationContext, responseErrorBody?.message, Toast.LENGTH_SHORT).show()
                         }
                     }
-
                 })
             }else{
                 Toast.makeText(applicationContext, "이메일 또는 비밀번호가 비어있을 수 없습니다", Toast.LENGTH_SHORT).show()
