@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.dnd.kindit.MainActivity
 import com.dnd.kindit.R
+import com.dnd.kindit.arch.view.FavoriteInitTagActivity
 import com.dnd.kindit.retrofit.RetrofitClient
 import com.dnd.kindit.retrofit.domain.request.UserLoginRequest
 import com.dnd.kindit.retrofit.domain.response.CommonResponse
@@ -28,9 +29,13 @@ class KindItLoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kindit_login)
 
+        // 첫 사용자 태그 입력 하는 페이지 구현
+        startActivity(Intent(applicationContext, FavoriteInitTagActivity::class.java))
+
         init()
 
         initListener()
+
     }
 
     private fun init(){
