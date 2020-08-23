@@ -5,8 +5,8 @@ import android.os.Bundle
 import com.dnd.kindit.config.CommunityFragment
 import com.dnd.kindit.main.MainFragment
 import com.dnd.kindit.main.MyselfFragment
-import com.dnd.kindit.recommend.EncyclopediaFragment
 import com.dnd.kindit.search.SearchFragment
+import com.dnd.kindit.view.encyclopedia.EncyclopediaFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
