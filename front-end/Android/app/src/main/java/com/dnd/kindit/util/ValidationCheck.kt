@@ -26,4 +26,8 @@ class ValidationCheck {
     fun checkAllValidation(): Boolean {
         return changeEmail && changeNickname && changePassword1 && changePassword2
     }
+
+    fun isEmpty(text : String) : Boolean{
+        return text != "" && text.isNotEmpty()
+    }
 }

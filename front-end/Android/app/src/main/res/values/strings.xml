@@ -5,26 +5,25 @@
     <string name="open">open</string>
     <string name="close">close</string>
 
-    <!-- Launcher Activity Text -->
     <string name="lc_tv_info">Loading...</string>
-
-
-    <!-- Login Activity Text -->
     <string name="login_tv_info1">카인딧에 오신것을 환영합니다!</string>
     <string name="login_tv_info2">여러분만의 레시피를 마음껏 공유해주세요!</string>
     <string name="login_tv_sign_up">회원가입</string>
     <string name="login_btn_login">로그인</string>
     <string name="login_btn_social">소셜로 로그인</string>
-
-
-    <!-- SignUp Activity Text -->
     <string name="su_tv_sign_up">회원가입</string>
     <string name="su_tv_email">이메일</string>
-    <string name="su_edt_email">Email</string>
+    <string name="su_edt_email">이메일</string>
     <string name="su_tv_nickname">닉네임</string>
     <string name="su_edt_nickname">닉네임</string>
     <string name="su_btn_nickname_valid">중복 확인</string>
     <string name="su_tv_pass1">비밀번호</string>
     <string name="su_tv_pass2">비밀번호 확인</string>
     <string name="su_btn_req_sign">회원가입 요청</string>
+    <string name="kl_tv_find_email">이메일 찾기</string>
+    <string name="kl_tv_find_password">비밀번호 찾기</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="fd_btn_send">메일 발송</string>
+    <string name="fp_tv_info">입력하신 이메일로 임시비밀번호를 발송해 드렸습니다.\n로그인 후 비밀번호를 변경해 주세요.</string>
 </resources>
