@@ -12,6 +12,7 @@ import com.dnd.kindit.retrofit.RetrofitClient
 import com.dnd.kindit.retrofit.domain.request.UserLoginRequest
 import com.dnd.kindit.retrofit.domain.response.CommonResponse
 import com.dnd.kindit.retrofit.domain.response.UserLoginResponse
+import com.dnd.kindit.util.PreferenceManager
 import com.dnd.kindit.util.ValidationCheck
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_kindit_login.*
@@ -77,7 +78,7 @@ class KindItLoginActivity : AppCompatActivity() {
                             val responseBody = response.body()
                             if (responseBody?.result == "success") {
                                 // token 저장해야함
-                                Log.i(TAG, responseBody.toString())
+                                PreferenceManager.setString(applicationContext, "kindit_token", responseBody.user.token)
 
                                 startActivity(Intent(applicationContext, MainActivity::class.java))
                                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
