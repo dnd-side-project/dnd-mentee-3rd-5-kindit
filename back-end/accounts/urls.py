@@ -12,7 +12,7 @@ urlpatterns = [
     # path('accounts/', include('allauth.urls')),
     path('jwt-auth/', obtain_jwt_token),          # JWT 토큰 획득
     path('jwt-auth/refresh/', refresh_jwt_token), # JWT 토큰 갱신
-    path('jwt-auth/verify/', verify_jwt_token),   # JWT 토큰 확인
+    path('jwt-auth/verify/', views.VerifyJSONWebToken.as_view()),   # JWT 토큰 확인
 
     path('check-nickname/', views.check_nickname, name='check_nickname'),
     path('registration/', views.SignUpView.as_view(), name='registration'),
