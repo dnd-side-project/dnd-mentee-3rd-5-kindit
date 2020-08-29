@@ -30,4 +30,5 @@
     <string name="fit_tv_info2">저희는 당신의 취향이 알고 싶어요!\n관심있는 키워드를 선택해 주세요 :)</string>
     <string name="fit_btn_ok">완료</string>
     <string name="ct_tv_item">서브웨이</string>
+    <string name="fs_edtl_serach">브랜드 혹은 메뉴명으로 검색보세요.</string>
 </resources>
