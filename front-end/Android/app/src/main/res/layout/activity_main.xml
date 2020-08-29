@@ -31,5 +31,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contentContainer"
         app:menu="@menu/menu_bottomnavigation" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
