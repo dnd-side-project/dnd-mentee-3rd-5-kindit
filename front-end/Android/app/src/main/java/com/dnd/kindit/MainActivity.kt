@@ -10,7 +10,7 @@ import androidx.core.view.GravityCompat
 import com.dnd.kindit.config.CommunityFragment
 import com.dnd.kindit.main.MainFragment
 import com.dnd.kindit.main.MyselfFragment
-import com.dnd.kindit.search.SearchFragment
+import com.dnd.kindit.arch.view.SearchFragment
 import com.dnd.kindit.view.encyclopedia.EncyclopediaFragment
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*

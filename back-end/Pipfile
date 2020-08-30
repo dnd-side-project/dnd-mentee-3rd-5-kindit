@@ -10,6 +10,11 @@ django = "==3.0.2"
 djangorestframework = "==3.11.0"
 requests = "==2.24.0"
 drf-yasg = "*"
+djangorestframework-jwt = "*"
+bcrypt = "*"
+pytz = "*"
+pillow = "*"
+django-taggit = "*"
 
 [requires]
 python_version = "3.7"

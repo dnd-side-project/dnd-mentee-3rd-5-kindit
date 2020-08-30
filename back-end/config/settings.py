@@ -52,26 +52,53 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+]
+
+THIRD_PARTY_APP = [
+    'drf_yasg',
     'rest_framework',
+    'taggit',
 ]
 
 PROJECT_APPS = [
-    'users.apps.UsersConfig',
+    'accounts.apps.AccountsConfig',
+    'menu.apps.MenuConfig',
 ]
 
-INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
+INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APP
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        # 'rest_framework.permissions.AllowAny',
+    ],
+    'EXCEPTION_HANDLER': 'config.utils.custom_exception_handler'
+}
+
+SITE_ID = 1
+
+REST_USE_JWT = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
+
 
 TEMPLATES = [
     {
@@ -149,3 +176,38 @@ STATIC_ROOT = os.path.join(BASE_DIR, '.static')
 MEDIA_URL = '/media/' # 업로드 할 경로
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+#Account
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+
+# SMTP
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.naver.com'
+EMAIL_HOST_USER = 'kinds_eat@naver.com'
+EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = 'kinds_eat@naver.com'
+
+
+# JWT
+
+from datetime import datetime, timedelta
+
+JWT_AUTH = {
+    'JWT_ENCODE_HANDLER':'rest_framework_jwt.utils.jwt_encode_handler',
+    'JWT_DECODE_HANDLER':'rest_framework_jwt.utils.jwt_decode_handler',
+    'JWT_PAYLOAD_HANDLER':'rest_framework_jwt.utils.jwt_payload_handler',
+    'JWT_PAYLOAD_GET_USER_ID_HANDLER':'rest_framework_jwt.utils.jwt_get_user_id_from_payload_handler',
+    'JWT_RESPONSE_PAYLOAD_HANDLER':'rest_framework_jwt.utils.jwt_response_payload_handler',
+
+    'JWT_SECRET_KEY': get_secret("SECRET_KEY"),
+    'JWT_ALGORITHM': 'HS256', 
+    'JWT_ALLOW_REFRESH': True, 
+    'JWT_EXPIRATION_DELTA': timedelta(days=7), 
+    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=28), 
+}

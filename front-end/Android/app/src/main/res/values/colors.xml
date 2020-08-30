@@ -3,6 +3,7 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
     <color name="kinditMainColor1">#DE2347</color>
     <color name="kinditMainColor2">#FCD685</color>
     <color name="kinditMainColor3">#FB9898</color>
@@ -12,4 +13,7 @@
     <!-- Kindit's Color-->
     <color name="inputTextBoxColor">#F3F3F3</color>
     <color name="DividerLineColor">#EDEDED</color>
+
+    <color name="ratingOnColor">#ffef8b</color>
+    <color name="ratingOffColor">#33000000</color>
 </resources>
