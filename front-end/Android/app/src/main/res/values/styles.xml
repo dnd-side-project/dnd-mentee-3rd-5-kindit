@@ -5,14 +5,17 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@android:color/darker_gray</item>
     </style>
 
     <style name="TabTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@android:color/white</item>                      <!-- 배경 -->
-        <item name="android:textColorPrimary">@color/kinditMainColor3</item>       <!-- 탭바 선택된 텍스트 -->
+        <item name="android:textColorPrimary">@color/kinditMainColor1</item>       <!-- 탭바 선택된 텍스트 -->
         <item name="android:textColorSecondary">@android:color/black</item>     <!-- 탭바 텍스트 -->
-        <item name="colorAccent">@color/kinditMainColor3</item>                    <!-- 하단 움직이는 바 색-->
+        <item name="colorAccent">@color/kinditMainColor1</item>                    <!-- 하단 움직이는 바 색-->
         <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="colorControlNormal">@color/kinditMainColor1</item>
     </style>
 
 </resources>

@@ -1,15 +1,27 @@
 package com.dnd.kindit
-
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import com.dnd.kindit.config.CommunityFragment
 import com.dnd.kindit.main.MainFragment
 import com.dnd.kindit.main.MyselfFragment
 import com.dnd.kindit.search.SearchFragment
 import com.dnd.kindit.view.encyclopedia.EncyclopediaFragment
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.header.*
+import kotlinx.android.synthetic.main.header.view.*
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    private val TAG = this.javaClass.toString()
+    private lateinit var toggle:ActionBarDrawerToggle
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -18,6 +30,21 @@ class MainActivity : AppCompatActivity() {
         MainFragment().let {
             supportFragmentManager.beginTransaction().add(R.id.contentContainer, it).commitAllowingStateLoss()
         }
+
+        val headerView = nav_view.getHeaderView(0)
+        val profileName = headerView.findViewById(R.id.tv_profileName) as TextView
+        profileName.text = "김페페님"
+
+        headerView.menu_close.setOnClickListener{
+            drawer_layout.closeDrawer(GravityCompat.START)
+        }
+
+        nav_view.setNavigationItemSelectedListener(this)
+        nav_view.bringToFront()
+        setSupportActionBar(toolbar)
+        toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.open,R.string.close)
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
 
         bottomNavigation.setOnNavigationItemSelectedListener { item ->
 
@@ -37,7 +64,23 @@ class MainActivity : AppCompatActivity() {
             }
             return@setOnNavigationItemSelectedListener true
         }
+    }
 
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)){
+            drawer_layout.closeDrawer(GravityCompat.START)
+        }else super.onBackPressed()
+    }
 
+    //drawable 클릭이벤트
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+           R.id.menu_bookmark -> Log.e(TAG, "북마크")
+           R.id.menu_settings -> Log.e(TAG, "설정")
+        }
+
+        drawer_layout.closeDrawer(GravityCompat.START)
+        return super.onOptionsItemSelected(item)
     }
 }
