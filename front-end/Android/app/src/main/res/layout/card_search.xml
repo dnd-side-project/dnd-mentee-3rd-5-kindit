@@ -3,70 +3,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:checkable="true"
         android:clickable="true"
         android:focusable="true"
-        app:cardCornerRadius="10dp">
+        android:theme="@style/Theme.MaterialComponents.Light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <RatingBar
-                android:id="@+id/ratingBar"
+                android:id="@+id/fsi_rb"
                 style="@style/Widget.AppCompat.RatingBar.Small"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView16" />
+                android:layout_marginStart="20dp"
+                android:numStars="5"
+                android:max="5"
+                android:theme="@style/RatingBar"
+                app:layout_constraintBottom_toBottomOf="@+id/textView16"
+                app:layout_constraintStart_toEndOf="@+id/textView16"
+                app:layout_constraintTop_toTopOf="@+id/textView16" />
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/fsi_cv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
             <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/fsi_iv_pic"
+                android:layout_width="200dp"
+                android:layout_height="135dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/sample_sandwitch"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
+            </androidx.cardview.widget.CardView>
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/fsi_tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="담백한 에그마요"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+                app:layout_constraintTop_toBottomOf="@+id/fsi_cv" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/fsi_tv_viewCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="47회"
+                app:layout_constraintBottom_toBottomOf="@+id/fsi_tv_name"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+                app:layout_constraintTop_toTopOf="@+id/fsi_tv_name" />
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/fsi_tv_userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="TextView"
+                android:text="by 사냥꾼"
+                android:textColor="#000000"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                app:layout_constraintTop_toBottomOf="@+id/fsi_tv_name" />
 
             <TextView
                 android:id="@+id/textView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="TextView"
+                android:text="@string/fsi_tv_rb"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                app:layout_constraintTop_toBottomOf="@+id/fsi_tv_userName" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 

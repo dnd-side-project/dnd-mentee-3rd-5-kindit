@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dnd.kindit.R
+import com.dnd.kindit.arch.adapter.SearchAdapter
 import com.dnd.kindit.arch.model.SearchItem
 import com.dnd.kindit.arch.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -32,7 +33,9 @@ class SearchFragment : Fragment() {
 
         list = ArrayList()
         for(i in 0..5){
-            list.add(SearchItem("$i", i+0L, "$i", i+0L))
+            list.add(SearchItem("$i", i+0L, "$i", i+0L, ""))
         }
+        fs_rcv_items.adapter = SearchAdapter(list)
+
     }
 }

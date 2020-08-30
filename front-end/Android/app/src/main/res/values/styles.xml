@@ -15,4 +15,10 @@
         <item name="android:windowContentTransitions">true</item>
     </style>
 
+
+    <!-- -->
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/ratingOffColor</item>
+        <item name="colorControlActivated">@color/ratingOnColor</item>
+    </style>
 </resources>

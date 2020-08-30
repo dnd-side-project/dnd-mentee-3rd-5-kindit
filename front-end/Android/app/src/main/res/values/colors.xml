@@ -12,4 +12,7 @@
 
     <!-- Kindit's Color-->
     <color name="inputTextBoxColor">#F3F3F3</color>
+
+    <color name="ratingOnColor">#ffef8b</color>
+    <color name="ratingOffColor">#33000000</color>
 </resources>
