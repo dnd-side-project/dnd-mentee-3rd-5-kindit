@@ -56,4 +56,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     // 인디케이터
     implementation 'me.relex:circleindicator:2.1.4'
+
+    //이미지 둥글게
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
+
+
 }

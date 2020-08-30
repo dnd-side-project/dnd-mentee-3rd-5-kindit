@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_bookmark"
+            android:title="북마크" />
+        <item
+            android:id="@+id/menu_write"
+            android:title="내가 쓴글" />
+        <item
+            android:id="@+id/menu_recipe"
+            android:title="내가 쓴 레시피" />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item android:title="설정">
+            <menu>
+                <item
+                    android:id="@+id/menu_settings"
+                    android:title="사용자 설정"
+                    app:itemIconTint="@color/kinditMainColor1"
+                    android:icon="@drawable/ic_settings"/>
+
+                <item
+                    android:id="@+id/menu_logout"
+                    android:title="로그아웃"
+                    app:itemIconTint="@color/kinditMainColor1"
+                    />
+            </menu>
+        </item>
+    </group>
+</menu>
