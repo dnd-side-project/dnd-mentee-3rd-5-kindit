@@ -46,5 +46,8 @@ def custom_exception_handler(exc, context):
         # temp_dict.update({'result':'fail'})
         # response.data = {**temp_dict, **response.data}
         response.data['result'] = 'fail'
-        response.data['message'] = response.data.pop('detail')
+        try:
+            response.data['message'] = response.data.pop('detail')
+        except:
+            return response
     return response

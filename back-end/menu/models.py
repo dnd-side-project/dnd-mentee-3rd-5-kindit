@@ -8,10 +8,10 @@ from taggit.managers import TaggableManager
 from menu.choice import BRAND_CHOICES
 
 
-def get_image_path(instance, filename):
-    ymd_path = datetime.now().strftime('%Y/%m/%d')
-    uuid_name = uuid4().hex
-    return '/'.join(['image_file/', ymd_path, uuid_name])
+# def get_image_path(instance, filename):
+    # ymd_path = datetime.now().strftime('%Y/%m/%d')
+    # uuid_name = uuid4().hex
+    # return '/'.join(['image_file/', ymd_path, uuid_name])
 
 
 class Menu(models.Model):
@@ -26,8 +26,8 @@ class Menu(models.Model):
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='likes', verbose_name='찜', blank=True)
     hits = models.PositiveIntegerField(verbose_name='조회수', default=0)
     comments = models.PositiveIntegerField(verbose_name='댓글수', default='0')
-    upload_image = models.ImageField(upload_to=get_image_path, null=True, blank=True, verbose_name='이미지파일')
-    filename = models.CharField(max_length=64, null=True, verbose_name='이미지첨부파일명')
+    upload_image = models.ImageField(upload_to="image_file/%Y/%m/%d", null=True, blank=True, verbose_name='이미지파일')
+    # filename = models.CharField(max_length=64, null=True, verbose_name='이미지첨부파일명')
     tags = TaggableManager(blank=True, verbose_name='태그') 
     created_date = models.DateTimeField(auto_now_add=True, verbose_name='등록일')
     updated_date = models.DateTimeField(auto_now=True, verbose_name='수정일')

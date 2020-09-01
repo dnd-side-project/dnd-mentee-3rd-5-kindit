@@ -10,6 +10,8 @@ from rest_framework.decorators import api_view, permission_classes, authenticati
 from rest_framework.permissions import IsAuthenticated, AllowAny # 로그인 여부
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication # JWT인증
 from django.http import Http404
+from rest_framework import viewsets
+from rest_framework import permissions
 
 
 class MenuListView(APIView):
@@ -64,3 +66,13 @@ class MenuDetailView(APIView):
         Menu = self.get_object(pk)
         Menu.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class BoardViewSet(viewsets.ModelViewSet):
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerializer
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.AllowAny]
+
+    def perform_create(self, serializer):
+        serializer.save(writer=self.request.user)
