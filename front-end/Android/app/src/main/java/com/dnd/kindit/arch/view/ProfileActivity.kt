@@ -36,11 +36,26 @@ class ProfileActivity : AppCompatActivity() {
     private fun init() {
         // 여기서 뷰 모델 연결
         profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
+
+        pf_img_back.setOnClickListener {
+            finish()
+        }
+        pf_btn_save.setOnClickListener{
+            profileViewModel.modifyProfile(this, pf_edt_nickname.text.toString())
+        }
     }
 
     private fun initViewModelFun() {
         profileViewModel.user.observe(this, Observer {
             pf_edt_nickname.setText(it.user.nickname)
+        })
+        profileViewModel.check.observe(this, Observer {
+            if(it){
+                Toast.makeText(this, "성공적으로 변경 되었습니다.", Toast.LENGTH_SHORT).show()
+                finish()
+            }else{
+                Toast.makeText(this, "회원 정보 수정 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
+            }
         })
     }
 

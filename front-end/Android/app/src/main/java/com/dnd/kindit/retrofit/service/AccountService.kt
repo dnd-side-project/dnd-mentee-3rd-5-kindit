@@ -1,6 +1,7 @@
 package com.dnd.kindit.retrofit.service
 
 import com.dnd.kindit.retrofit.domain.request.EmailRequest
+import com.dnd.kindit.retrofit.domain.request.ProfileUpdateRequest
 import com.dnd.kindit.retrofit.domain.request.UserLoginRequest
 import com.dnd.kindit.retrofit.domain.request.UserSignUpRequest
 import com.dnd.kindit.retrofit.domain.response.CommonResponse
@@ -33,5 +34,11 @@ interface AccountService{
     @GET("api/accounts/user/")
     fun getUserProfile(
         @Header("Authorization") token: String
+    ): Call<UserResponse>
+
+    @PATCH("api/accounts/user/")
+    fun modifyUserProfile(
+        @Header("Authorization") token: String,
+        @Body nickname: ProfileUpdateRequest
     ): Call<UserResponse>
 }
