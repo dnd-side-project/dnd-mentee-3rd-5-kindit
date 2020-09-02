@@ -16,7 +16,8 @@ from menu.choice import BRAND_CHOICES
 
 class Menu(models.Model):
     writer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, verbose_name='작성자')
-    brand = models.CharField(choices=BRAND_CHOICES, null=True, max_length=64, verbose_name='브랜드')
+    # brand = models.CharField(choices=BRAND_CHOICES, null=True, max_length=64, verbose_name='브랜드')
+    brand = models.CharField(max_length=64, verbose_name='브랜드')
     title = models.CharField(max_length=64, verbose_name='커스텀메뉴')
     base_menu = models.CharField(max_length=64, verbose_name='원본메뉴')
     ingredient = models.CharField(max_length=64, verbose_name='재료')

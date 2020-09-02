@@ -191,10 +191,11 @@ class UserAPIView(APIView):
                     'date_joined': serializer.data['date_joined']
                 }
             }, status=status.HTTP_200_OK)
-        return JsonResponse({
-                'result': 'fail',
-                'message': serializer.errors,
-            }, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return JsonResponse({
+                    'result': 'fail',
+                    'message': '이미 존재하는 닉네임입니다.',
+                }, status=status.HTTP_409_CONFLICT)
 
     def delete(self, request, *args, **kwargs):
         snippet = self.get_object()

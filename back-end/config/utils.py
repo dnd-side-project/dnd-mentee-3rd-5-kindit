@@ -37,6 +37,8 @@
 #     return _wrapper
 
 from rest_framework.views import exception_handler
+from django.utils.deprecation import MiddlewareMixin
+from rest_framework.response import Response
 
 
 def custom_exception_handler(exc, context):
@@ -51,3 +53,23 @@ def custom_exception_handler(exc, context):
         except:
             return response
     return response
+
+
+class ResponseCustomMiddleware(MiddlewareMixin):
+    def __init__(self, *args, **kwargs):
+        super(ResponseCustomMiddleware, self).__init__(*args, **kwargs)
+
+    def process_template_response(self, request, response):
+        if not response.is_rendered and isinstance(response, Response):
+            if isinstance(response.data, dict):
+                message = response.data.get('message', '')
+                if 'data' not in response.data:
+                    response.data = {'detail': response.data}
+                    
+                if response.status_code // 100 == 2:
+                    result = 'success'
+                elif response.status_code // 100 == 4:
+                    result = 'fail'
+                response.data.setdefault('result', result)
+                response.data.setdefault('message', message)
+        return response
