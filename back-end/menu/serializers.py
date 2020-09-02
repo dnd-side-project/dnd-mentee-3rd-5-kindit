@@ -29,23 +29,11 @@ class MenuDetailSerializer(serializers.ModelSerializer):
     # comments = CommentSerializer(many=True)
     # creator = FeedUserSerializer()
     writer = serializers.CharField(source="writer.nickname", read_only=True)
-    likes_count = serializers.IntegerField(source="total_likes")
+    likes_count = serializers.IntegerField(source="total_likes", read_only=True)
     class Meta:
         model = Menu
-        # fields = (
-        #     'id',
-        #     'title',
-        #     'writer',
-        #     'hits',
-        #     'rating',
-        #     'upload_image',
-        #     'price',
-        #     'ingredient',
-        #     'base_menu',
-        #     'tip',
-        #     'updated_date'
-        # )
         fields = '__all__'
         read_only_fields = (
             'writer',
+            'likes_count'
         )

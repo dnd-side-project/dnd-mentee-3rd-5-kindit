@@ -64,7 +64,7 @@ class ResponseCustomMiddleware(MiddlewareMixin):
             if isinstance(response.data, dict):
                 message = response.data.get('message', '')
                 if 'data' not in response.data:
-                    response.data = {'detail': response.data}
+                    response.data = {'data': response.data}
                     
                 if response.status_code // 100 == 2:
                     result = 'success'

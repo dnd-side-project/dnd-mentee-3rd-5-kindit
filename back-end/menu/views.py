@@ -21,14 +21,14 @@ class MenuListView(APIView):
         serializer = MenuPostSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(writer=self.request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response({'data':serializer.data, 'message':'성공적으로 등록되었습니다.'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, format=None):
         # queryset = Menu.objects.all()
         queryset = Menu.objects.exclude(deleted=True)
         serializer = MenuSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response({'data':serializer.data})
 
 
 class MenuDetailView(APIView):
@@ -49,7 +49,7 @@ class MenuDetailView(APIView):
 
     def put(self, request, pk, format=None):
         Menu = self.get_object(pk)
-        serializer = MenuSerializer(Menu, data=request.data)
+        serializer = MenuDetailSerializer(Menu, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -60,7 +60,7 @@ class MenuDetailView(APIView):
         Menu.deleted = True
         Menu.save()
         # Menu.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({'data':None, 'message':'성공적으로 삭제되었습니다.'}, status=status.HTTP_204_NO_CONTENT)
 
 
 # class BoardViewSet(viewsets.ModelViewSet):
