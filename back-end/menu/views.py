@@ -48,17 +48,26 @@ class MenuDetailView(APIView):
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):
-        Menu = self.get_object(pk)
-        serializer = MenuDetailSerializer(Menu, data=request.data)
+        writer = self.request.user
+        try:
+            menu = Menu.objects.get(pk=pk, writer=writer)
+        except Menu.DoesNotExist:
+            return Response({'data':None, 'message':'본인 게시글이 아닙니다.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        serializer = MenuDetailSerializer(menu, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response({'data':serializer.data, 'message':'성공적으로 수정되었습니다.'})
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):
-        Menu = self.get_object(pk)
-        Menu.deleted = True
-        Menu.save()
+        writer = self.request.user
+        try:
+            menu = Menu.objects.get(pk=pk, writer=writer)
+        except Menu.DoesNotExist:
+            return Response({'data':None, 'message':'본인 게시글이 아닙니다.'}, status=status.HTTP_401_UNAUTHORIZED)
+        menu.deleted = True
+        menu.save()
         # Menu.delete()
         return Response({'data':None, 'message':'성공적으로 삭제되었습니다.'}, status=status.HTTP_204_NO_CONTENT)
 
