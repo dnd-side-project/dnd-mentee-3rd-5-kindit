@@ -12,4 +12,5 @@ urlpatterns = [
     path('<int:pk>/', views.MenuDetailView.as_view(), name='MenuDetailView'),
     # path('', include(router.urls)),
     path('keward/', views.TagListView.as_view(), name='TagListView'),
+    path('<int:pk>/like/', views.MenuLikeView.as_view(), name='MenuLikeView'),
 ]

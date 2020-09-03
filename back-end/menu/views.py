@@ -93,3 +93,20 @@ class TagListView(APIView):
         user.preference_keward = json.loads(request.body)['preference_keward']
         user.save()
         return Response({'data':user.preference_keward,'message':'성공적으로 등록되었습니다.'})
+
+
+class MenuLikeView(APIView):
+    def post(self, request, pk, format=None):
+        user = self.request.user
+        try:
+            menu = Menu.objects.get(pk=pk, writer=user)
+        except Menu.DoesNotExist:
+            menu = Menu.objects.get(pk=pk)
+            if menu.likes.filter(id=user.id):
+                menu.likes.remove(user.id)
+                return Response({'data':None, 'message':'해당 게시글 찜을 취소했습니다.'}, status=status.HTTP_200_OK)
+            else:
+                menu.likes.add(user.id)
+                return Response({'data':None, 'message':'해당 게시글을 찜했습니다.'}, status=status.HTTP_200_OK)
+
+        return Response({'data':None, 'message':'본인 게시글은 찜할 수 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
