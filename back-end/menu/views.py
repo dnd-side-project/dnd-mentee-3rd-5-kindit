@@ -110,3 +110,23 @@ class MenuLikeView(APIView):
                 return Response({'data':None, 'message':'해당 게시글을 찜했습니다.'}, status=status.HTTP_200_OK)
 
         return Response({'data':None, 'message':'본인 게시글은 찜할 수 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class MenuRatingView(APIView):
+    def post(self, request, pk, format=None):
+        user = self.request.user
+        try:
+            menu = Menu.objects.get(pk=pk, writer=user)
+        except Menu.DoesNotExist:
+            menu = Menu.objects.get(pk=pk)
+            if menu.rating_user.filter(id=user.id):
+                return Response({'data':None, 'message':'이미 별점을 등록하셨습니다.'}, status=status.HTTP_400_BAD_REQUEST)
+            else:  
+                tmp_rating = menu.rating * menu.rating_user.count()
+                menu.rating_user.add(user.id)
+                rating = json.loads(request.body)['rating']
+                menu.rating = (tmp_rating + rating) / menu.rating_user.count()
+                menu.save()
+                return Response({'data':None, 'message':'해당 게시글에 별점을 등록했습니다.'}, status=status.HTTP_200_OK)
+
+        return Response({'data':None, 'message':'본인 게시글에는 별점을 등록할 수 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
