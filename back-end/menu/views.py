@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView, View
 from rest_framework.response import Response
 from .models import Menu
-from .serializers import MenuSerializer, MenuPostSerializer, MenuDetailSerializer
+from .serializers import MenuSerializer, MenuPostSerializer, MenuDetailSerializer, TagListSerializer
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse
 from rest_framework import status
@@ -12,6 +12,8 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication # JWT�
 from django.http import Http404
 from rest_framework import viewsets
 from rest_framework import permissions
+from taggit.models import Tag
+from django.db.models import Count
 
 
 class MenuListView(APIView):
@@ -72,10 +74,15 @@ class MenuDetailView(APIView):
         return Response({'data':None, 'message':'성공적으로 삭제되었습니다.'}, status=status.HTTP_204_NO_CONTENT)
 
 
-# class BoardViewSet(viewsets.ModelViewSet):
-#     queryset = Menu.objects.all()
-#     serializer_class = MenuSerializer
-#     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+class TagListView(APIView):
+    def get(self, request, format=None):
+        queryset = Tag.objects.all()
+        queryset_count = queryset.annotate(num_times=Count('taggit_taggeditem_items'))[:30]
 
-#     def perform_create(self, serializer):
-#         serializer.save(writer=self.request.user)
+        # tag_dict = {}
+        # for tag in queryset_count:
+        #     tag_dict[tag.name] = tag.num_times
+        # print(tag_dict)
+
+        serializer = TagListSerializer(queryset_count, many=True)
+        return Response({'data':serializer.data})

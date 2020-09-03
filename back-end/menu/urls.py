@@ -1,8 +1,6 @@
 from django.urls import include, path
 from menu import views
 from rest_framework.routers import DefaultRouter
-from django.conf.urls.static import static
-from django.conf import settings
 
 
 # router = DefaultRouter()
@@ -11,8 +9,7 @@ app_name = 'menu'
 
 urlpatterns = [
     path('', views.MenuListView.as_view(), name='MenuListView'),
-    path('<int:pk>/', views.MenuDetailView.as_view(), name='MenuDetailView')
+    path('<int:pk>/', views.MenuDetailView.as_view(), name='MenuDetailView'),
     # path('', include(router.urls)),
+    path('keward/', views.TagListView.as_view(), name='TagListView'),
 ]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

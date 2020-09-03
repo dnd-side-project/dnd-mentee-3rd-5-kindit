@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from menu.models import Menu
 from taggit_serializer.serializers import TagListSerializerField, TaggitSerializer
+from taggit.models import Tag
 
 
 class MenuSerializer(serializers.ModelSerializer):
@@ -49,3 +50,9 @@ class MenuDetailSerializer(serializers.ModelSerializer):
             'writer',
             'likes_count'
         )
+
+
+class TagListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ('id', 'name')
