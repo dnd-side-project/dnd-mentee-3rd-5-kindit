@@ -15,6 +15,7 @@ bcrypt = "*"
 pytz = "*"
 pillow = "*"
 django-taggit = "*"
+django-taggit-serializer = "*"
 
 [requires]
 python_version = "3.7"

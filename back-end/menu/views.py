@@ -54,7 +54,7 @@ class MenuDetailView(APIView):
         except Menu.DoesNotExist:
             return Response({'data':None, 'message':'본인 게시글이 아닙니다.'}, status=status.HTTP_401_UNAUTHORIZED)
 
-        serializer = MenuDetailSerializer(menu, data=request.data)
+        serializer = MenuPostSerializer(menu, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response({'data':serializer.data, 'message':'성공적으로 수정되었습니다.'})

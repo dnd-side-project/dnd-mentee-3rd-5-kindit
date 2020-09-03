@@ -59,6 +59,7 @@ THIRD_PARTY_APP = [
     'drf_yasg',
     'rest_framework',
     'taggit',
+    'taggit_serializer',
 ]
 
 PROJECT_APPS = [
