@@ -14,4 +14,5 @@ urlpatterns = [
     path('keward/', views.TagListView.as_view(), name='TagListView'),
     path('<int:pk>/like/', views.MenuLikeView.as_view(), name='MenuLikeView'),
     path('<int:pk>/rating/', views.MenuRatingView.as_view(), name='MenuRatingView'),
+    path('like-menu/', views.LikeMenuView.as_view(), name='LikeMenuView'),
 ]
