@@ -4,10 +4,10 @@ class SearchItem {
     var name: String = ""
     var viewCount: Long = 0L
     var userName: String = ""
-    var starCount: Long = 0L
-    var imgPic: String = ""
+    var starCount: Float = 0.0f
+    var imgPic: String? = ""
 
-    constructor(name: String, viewCount: Long, userName: String, starCount: Long, imgPic: String) {
+    constructor(name: String, viewCount: Long, userName: String, starCount: Float, imgPic: String?) {
         this.name = name
         this.viewCount = viewCount
         this.userName = userName
