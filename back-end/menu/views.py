@@ -77,11 +77,11 @@ class MenuDetailView(APIView):
 class TagListView(APIView):
     def get(self, request, format=None):
         queryset = Tag.objects.all()
-        queryset_count = queryset.annotate(num_times=Count('taggit_taggeditem_items'))[:30]
-
+        queryset_count = queryset.annotate(tag_count=Count('taggit_taggeditem_items')).order_by('-tag_count')[:30]
+        
         # tag_dict = {}
         # for tag in queryset_count:
-        #     tag_dict[tag.name] = tag.num_times
+        #     tag_dict[tag.name] = tag.tag_count
         # print(tag_dict)
 
         serializer = TagListSerializer(queryset_count, many=True)
