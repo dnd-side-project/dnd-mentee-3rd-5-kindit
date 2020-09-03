@@ -104,12 +104,12 @@ class MenuLikeView(APIView):
             menu = Menu.objects.get(pk=pk)
             if menu.likes.filter(id=user.id):
                 menu.likes.remove(user.id)
-                return Response({'data':None, 'message':'해당 게시글 찜을 취소했습니다.'}, status=status.HTTP_200_OK)
+                return Response({'data':None, 'message':'해당 메뉴 찜을 취소했습니다.'}, status=status.HTTP_200_OK)
             else:
                 menu.likes.add(user.id)
-                return Response({'data':None, 'message':'해당 게시글을 찜했습니다.'}, status=status.HTTP_200_OK)
+                return Response({'data':None, 'message':'해당 메뉴를 찜했습니다.'}, status=status.HTTP_200_OK)
 
-        return Response({'data':None, 'message':'본인 게시글은 찜할 수 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'data':None, 'message':'본인 메뉴는 찜할 수 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class MenuRatingView(APIView):
@@ -127,9 +127,9 @@ class MenuRatingView(APIView):
                 rating = json.loads(request.body)['rating']
                 menu.rating = (tmp_rating + rating) / menu.rating_user.count()
                 menu.save()
-                return Response({'data':None, 'message':'해당 게시글에 별점을 등록했습니다.'}, status=status.HTTP_200_OK)
+                return Response({'data':None, 'message':'해당 메뉴에 별점을 등록했습니다.'}, status=status.HTTP_200_OK)
 
-        return Response({'data':None, 'message':'본인 게시글에는 별점을 등록할 수 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'data':None, 'message':'본인 메뉴에는 별점을 등록할 수 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LikeMenuView(APIView):
@@ -140,3 +140,13 @@ class LikeMenuView(APIView):
             return Response({'data':serializer.data})
         else:
             return Response({'data':None, 'message':'찜한 메뉴가 없습니다.'})
+
+
+class WriteMenuView(APIView):
+    def get(self, request, format=None):
+        queryset = Menu.objects.filter(writer=request.user.id).exclude(deleted=True)
+        if queryset:
+            serializer = MenuSerializer(queryset, many=True)
+            return Response({'data':serializer.data})
+        else:
+            return Response({'data':None, 'message':'작성한 메뉴가 없습니다.'})
