@@ -9,6 +9,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
     nickname = models.CharField(unique=True, max_length=20, verbose_name='닉네임')
     registered_date = models.DateTimeField(auto_now_add=True, verbose_name='가입일')
+    preference_keward = models.CharField(blank=True, max_length=255, verbose_name='선호 키워드')
 
     objects = CustomUserManager()
 

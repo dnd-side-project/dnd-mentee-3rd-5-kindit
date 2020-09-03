@@ -173,6 +173,7 @@ class UserAPIView(APIView):
             'user': {
                 'email': serializer.data['email'],
                 'nickname': serializer.data['nickname'],
+                'preference_keward': serializer.data['preference_keward'],
                 'date_joined': serializer.data['date_joined']
             }
         }, status=status.HTTP_200_OK)
@@ -188,6 +189,7 @@ class UserAPIView(APIView):
                 'user': {
                     'email': serializer.data['email'],
                     'nickname': serializer.data['nickname'],
+                    'preference_keward': serializer.data['preference_keward'],
                     'date_joined': serializer.data['date_joined']
                 }
             }, status=status.HTTP_200_OK)

@@ -14,6 +14,8 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from taggit.models import Tag
 from django.db.models import Count
+from accounts.models import CustomUser as User
+import json
 
 
 class MenuListView(APIView):
@@ -78,11 +80,16 @@ class TagListView(APIView):
     def get(self, request, format=None):
         queryset = Tag.objects.all()
         queryset_count = queryset.annotate(tag_count=Count('taggit_taggeditem_items')).order_by('-tag_count')[:30]
-        
         # tag_dict = {}
         # for tag in queryset_count:
         #     tag_dict[tag.name] = tag.tag_count
         # print(tag_dict)
-
         serializer = TagListSerializer(queryset_count, many=True)
         return Response({'data':serializer.data})
+
+    def post(self, request, format=None):
+        user_email = self.request.user
+        user = User.objects.get(email=user_email)
+        user.preference_keward = json.loads(request.body)['preference_keward']
+        user.save()
+        return Response({'data':user.preference_keward,'message':'성공적으로 등록되었습니다.'})
