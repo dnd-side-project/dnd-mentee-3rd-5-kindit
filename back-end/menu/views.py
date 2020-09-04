@@ -64,7 +64,6 @@ class MenuListView(APIView):
 class MenuSearchView(APIView):
     def get(self, request, format=None):
         keyword = self.request.query_params.get('keyword', None)
-        print(keyword)
         if len(keyword) > 1 :
             queryset = Menu.objects.filter(
                 Q (brand__icontains=keyword) |
