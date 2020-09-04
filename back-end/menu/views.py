@@ -92,7 +92,7 @@ class MenuSearchView(APIView):
 
             if queryset:
                 serializer = MenuSerializer(queryset, many=True)
-                return Response({'data':serializer.data})
+                return Response({'data':serializer.data, 'message':str(queryset.count())+'개의 메뉴가 검색되었습니다.'})
             else:
                 return Response({'data':None, 'message':'검색결과가 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
         else:
