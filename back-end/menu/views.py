@@ -16,6 +16,7 @@ from taggit.models import Tag
 from django.db.models import Count
 from accounts.models import CustomUser as User
 import json
+from django.db.models import Q
 
 
 class MenuPostView(APIView):
@@ -58,6 +59,27 @@ class MenuListView(APIView):
             return Response({'data':serializer.data})
         else:
             return Response({'data':None, 'message':'등록된 메뉴가 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class MenuSearchView(APIView):
+    def get(self, request, format=None):
+        keyword = self.request.query_params.get('keyword', None)
+        print(keyword)
+        if len(keyword) > 1 :
+            queryset = Menu.objects.filter(
+                Q (brand__icontains=keyword) |
+                Q (title__icontains=keyword) |
+                Q (base_menu__icontains=keyword) |
+                Q (ingredient__icontains=keyword)
+            ).exclude(deleted=True).order_by('-created_date')
+
+            if queryset:
+                serializer = MenuSerializer(queryset, many=True)
+                return Response({'data':serializer.data})
+            else:
+                return Response({'data':None, 'message':'검색결과가 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({'data':None, 'message':'검색어는 2글자 이상 입력해주세요.'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class MenuDetailView(APIView):
@@ -115,9 +137,9 @@ class TagListView(APIView):
     def post(self, request, format=None):
         user_email = self.request.user
         user = User.objects.get(email=user_email)
-        user.preference_keward = json.loads(request.body)['preference_keward']
+        user.preference_keyword = json.loads(request.body)['preference_keyword']
         user.save()
-        return Response({'data':user.preference_keward,'message':'성공적으로 등록되었습니다.'})
+        return Response({'data':user.preference_keyword,'message':'성공적으로 등록되었습니다.'})
 
 
 class MenuLikeView(APIView):

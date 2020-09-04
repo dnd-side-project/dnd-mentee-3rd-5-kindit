@@ -129,7 +129,7 @@ class UserSerializer(serializers.ModelSerializer):
             "id",
             "email",
             "nickname",
-            "preference_keward",
+            "preference_keyword",
             "date_joined",
         ]
         read_only_fields = ('email', )
