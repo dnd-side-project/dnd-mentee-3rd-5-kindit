@@ -59,6 +59,7 @@ class SearchFragment : Fragment() {
                 list.add(SearchItem(name=item.title, viewCount = item.hits, userName = item.writer, starCount = item.rating, imgPic = item.uploadImage))
             }
             fs_rcv_items.adapter = SearchAdapter(list)
+            Toast.makeText(this.context, it.message, Toast.LENGTH_SHORT).show()
         })
     }
 
@@ -66,5 +67,8 @@ class SearchFragment : Fragment() {
     }
 
     private fun initListener() {
+        fs_btn_search.setOnClickListener {
+            searchViewModel.getMenuListBySearch(this.activity!!, fs_edt_search.text.toString())
+        }
     }
 }

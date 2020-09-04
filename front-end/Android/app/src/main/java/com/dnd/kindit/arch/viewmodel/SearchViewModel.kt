@@ -23,12 +23,48 @@ class SearchViewModel : ViewModel() {
 
 
     // 기본 검색 데이터 가져오기
-    fun getMenuList(context: Context){
+    fun getMenuList(context: Context) {
         val token = PreferenceManager.getString(context, "kindit_token").toString()
 
         val menusService = RetrofitClient.kindItSearchService()
-        val menusCall = menusService.getMenuList("jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6Im1zbm8yQG5hdmVyLmNvbSIsImV4cCI6MTU5OTU4MzE4NCwiZW1haWwiOiJtc25vMkBuYXZlci5jb20iLCJvcmlnX2lhdCI6MTU5ODk3ODM4NH0.xNyzxIONa1Z5DbTaKMWPqCU3IufSjE3QlLmKtOAdaIA")
-        menusCall.enqueue(object: retrofit2.Callback<SearchItemsResponse>{
+        val menusCall =
+            menusService.getMenuList("jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6Im1zbm8yQG5hdmVyLmNvbSIsImV4cCI6MTU5OTU4MzE4NCwiZW1haWwiOiJtc25vMkBuYXZlci5jb20iLCJvcmlnX2lhdCI6MTU5ODk3ODM4NH0.xNyzxIONa1Z5DbTaKMWPqCU3IufSjE3QlLmKtOAdaIA")
+        menusCall.enqueue(object : retrofit2.Callback<SearchItemsResponse> {
+            override fun onFailure(call: Call<SearchItemsResponse>, t: Throwable) {
+                Log.e(TAG, t.message.toString())
+            }
+
+            override fun onResponse(call: Call<SearchItemsResponse>, response: Response<SearchItemsResponse>) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody?.result == "success") {
+                        _searchItemList.value = responseBody
+                    }
+                } else {
+                    val responseErrorBody = GsonBuilder().create()
+                        .fromJson(response.errorBody()?.string(), CommonResponse::class.java)
+                    Log.d(TAG, responseErrorBody.toString())
+                    val result = SearchItemsResponse()
+                    result.data = ArrayList()
+                    result.message = responseErrorBody.message
+                    result.result = responseErrorBody.result
+                    _searchItemList.value = result
+                }
+            }
+
+        })
+    }
+
+    // 검색어를 통해 데이터 가져오기
+    fun getMenuListBySearch(context: Context, keyword: String) {
+        val token = PreferenceManager.getString(context, "kindit_token").toString()
+
+        val menusService = RetrofitClient.kindItSearchService()
+        val menusCall = menusService.getMenuListBySearch(
+            "jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6Im1zbm8yQG5hdmVyLmNvbSIsImV4cCI6MTU5OTU4MzE4NCwiZW1haWwiOiJtc25vMkBuYXZlci5jb20iLCJvcmlnX2lhdCI6MTU5ODk3ODM4NH0.xNyzxIONa1Z5DbTaKMWPqCU3IufSjE3QlLmKtOAdaIA",
+            keyword
+        )
+        menusCall.enqueue(object : retrofit2.Callback<SearchItemsResponse> {
             override fun onFailure(call: Call<SearchItemsResponse>, t: Throwable) {
                 Log.e(TAG, t.message.toString())
             }
@@ -42,9 +78,13 @@ class SearchViewModel : ViewModel() {
                 } else {
                     val responseErrorBody = GsonBuilder().create().fromJson(response.errorBody()?.string(), CommonResponse::class.java)
                     Log.d(TAG, responseErrorBody.toString())
+                    val result = SearchItemsResponse()
+                    result.message = responseErrorBody.message
+                    result.result = responseErrorBody.result
+                    result.data = ArrayList()
+                    _searchItemList.value = result
                 }
             }
-
         })
     }
 
