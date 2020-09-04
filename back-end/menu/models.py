@@ -8,10 +8,24 @@ from taggit.managers import TaggableManager
 from menu.choice import BRAND_CHOICES
 
 
-# def get_image_path(instance, filename):
-    # ymd_path = datetime.now().strftime('%Y/%m/%d')
-    # uuid_name = uuid4().hex
-    # return '/'.join(['image_file/', ymd_path, uuid_name])
+class MenuIngredient(models.Model):
+    brand = models.CharField(max_length=64, verbose_name='브랜드')
+    name = models.CharField(max_length=64, verbose_name='재료이름')
+    ingredient_type = models.PositiveIntegerField(verbose_name='재료타입', default='0')
+    ingredient_image = models.ImageField(upload_to="ingredient/", null=True, blank=True, verbose_name='재료이미지')
+
+    def __str__(self):
+        return '%s - %s' % (self.brand, self.name)
+ 
+    def upload_image_delete(self, *args, **kargs):
+        if self.ingredient_image:
+            os.remove(os.path.join(settings.MEDIA_ROOT, self.ingredient_image.path))
+        super(Menu, self).delete(*args, **kargs)
+
+    class Meta:
+        db_table = '커스텀메뉴 재료'
+        verbose_name = '커스텀메뉴 재료'
+        verbose_name_plural = '커스텀메뉴 재료'
 
 
 class Menu(models.Model):
@@ -20,7 +34,8 @@ class Menu(models.Model):
     brand = models.CharField(max_length=64, verbose_name='브랜드')
     title = models.CharField(max_length=64, verbose_name='커스텀메뉴')
     base_menu = models.CharField(max_length=255, verbose_name='원본메뉴')
-    ingredient = models.CharField(max_length=255, verbose_name='재료')
+    # ingredient = models.CharField(max_length=255, verbose_name='재료')
+    ingredient = models.ManyToManyField(MenuIngredient, related_name='ingredient', verbose_name='재료', blank=True)
     price = models.PositiveIntegerField(verbose_name='가격', default='0')
     tip = models.TextField(verbose_name='팁')
     rating = models.DecimalField(max_digits=5, decimal_places=1, verbose_name='별점', default=0.0)

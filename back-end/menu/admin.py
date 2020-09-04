@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Menu, MenuComment
+from .models import Menu, MenuComment, MenuIngredient
 
 
 class MenuAdmin(admin.ModelAdmin):
@@ -25,5 +25,15 @@ class MenuCommentAdmin(admin.ModelAdmin):
     search_fields = ('post__title', 'content', 'writer__email',)
 
 
+class MenuIngredientAdmin(admin.ModelAdmin):
+    list_display = (
+        'brand', 
+        'ingredient_type',
+        'name',
+        )
+    search_fields = ('brand', 'name',)
+
+
 admin.site.register(Menu, MenuAdmin)
 admin.site.register(MenuComment, MenuCommentAdmin)
+admin.site.register(MenuIngredient, MenuIngredientAdmin)
