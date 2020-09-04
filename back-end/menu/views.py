@@ -18,7 +18,7 @@ from accounts.models import CustomUser as User
 import json
 
 
-class MenuListView(APIView):
+class MenuPostView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request, format=None):
@@ -29,10 +29,35 @@ class MenuListView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, format=None):
-        # queryset = Menu.objects.all()
-        queryset = Menu.objects.exclude(deleted=True)
-        serializer = MenuSerializer(queryset, many=True)
-        return Response({'data':serializer.data})
+        queryset = Menu.objects.exclude(deleted=True).order_by('-created_date')
+        if queryset:
+            serializer = MenuSerializer(queryset, many=True)
+            return Response({'data':serializer.data})
+        else:
+            return Response({'data':None, 'message':'등록된 메뉴가 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class MenuListView(APIView):
+    def get(self, request, brand, sort, format=None):
+        query_sort='-created_date'
+
+        if sort=='latest':
+            query_sort = '-created_date'
+        elif sort=='rank':
+            query_sort = '-rating'
+        elif sort=='hit':
+            query_sort = '-hits'
+
+        if brand=='all':
+            queryset =  Menu.objects.exclude(deleted=True).order_by(query_sort)
+        else:
+            queryset = Menu.objects.filter(brand=brand).exclude(deleted=True).order_by(query_sort)
+
+        if queryset:
+            serializer = MenuSerializer(queryset, many=True)
+            return Response({'data':serializer.data})
+        else:
+            return Response({'data':None, 'message':'등록된 메뉴가 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class MenuDetailView(APIView):
@@ -139,7 +164,7 @@ class LikeMenuView(APIView):
             serializer = MenuSerializer(queryset, many=True)
             return Response({'data':serializer.data})
         else:
-            return Response({'data':None, 'message':'찜한 메뉴가 없습니다.'})
+            return Response({'data':None, 'message':'찜한 메뉴가 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class WriteMenuView(APIView):
@@ -149,4 +174,4 @@ class WriteMenuView(APIView):
             serializer = MenuSerializer(queryset, many=True)
             return Response({'data':serializer.data})
         else:
-            return Response({'data':None, 'message':'작성한 메뉴가 없습니다.'})
+            return Response({'data':None, 'message':'작성한 메뉴가 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
