@@ -17,4 +17,6 @@ interface SearchService{
         @Header("Authorization") token: String,
         @Query("keyword") keyword: String
     ): Call<SearchItemsResponse>
+
+    
 }
