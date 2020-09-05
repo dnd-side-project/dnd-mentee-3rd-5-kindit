@@ -1,6 +1,7 @@
 package com.dnd.kindit.retrofit
 
 import com.dnd.kindit.retrofit.service.AccountService
+import com.dnd.kindit.retrofit.service.CommonService
 import com.dnd.kindit.retrofit.service.SearchService
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
@@ -26,6 +27,15 @@ class RetrofitClient{
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
             return retrofit.create(SearchService::class.java)
+        }
+
+        fun kindItCommonService(): CommonService {
+            val gson = GsonBuilder().setLenient().create()
+            retrofit = Retrofit.Builder()
+                .baseUrl("http://203.241.228.109:8080")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build()
+            return retrofit.create(CommonService::class.java)
         }
     }
 }

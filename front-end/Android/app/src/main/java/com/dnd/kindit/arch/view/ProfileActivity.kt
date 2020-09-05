@@ -36,13 +36,6 @@ class ProfileActivity : AppCompatActivity() {
     private fun init() {
         // 여기서 뷰 모델 연결
         profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
-
-        pf_img_back.setOnClickListener {
-            finish()
-        }
-        pf_btn_save.setOnClickListener{
-            profileViewModel.modifyProfile(this, pf_edt_nickname.text.toString())
-        }
     }
 
     private fun initViewModelFun() {
@@ -64,6 +57,11 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun initListener() {
-
+        pf_img_back.setOnClickListener {
+            finish()
+        }
+        pf_btn_save.setOnClickListener{
+            profileViewModel.modifyProfile(this, pf_edt_nickname.text.toString())
+        }
     }
 }
