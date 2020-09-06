@@ -8,10 +8,32 @@ from taggit.managers import TaggableManager
 from menu.choice import BRAND_CHOICES
 
 
+class BaseMenu(models.Model):
+    brand = models.CharField(max_length=64, verbose_name='브랜드')
+    name = models.CharField(max_length=64, verbose_name='메뉴이름')
+    menu_type = models.PositiveIntegerField(verbose_name='메뉴타입', default='0')
+    price = models.IntegerField(verbose_name='가격', default='0')
+    menu_image = models.ImageField(upload_to="base_menu/", null=True, blank=True, verbose_name='원본메뉴이미지')
+
+    def __str__(self):
+        return '%s - %s' % (self.brand, self.name)
+ 
+    def upload_image_delete(self, *args, **kargs):
+        if self.menu_image:
+            os.remove(os.path.join(settings.MEDIA_ROOT, self.menu_image.path))
+        super(BaseMenu, self).delete(*args, **kargs)
+
+    class Meta:
+        db_table = '원본메뉴'
+        verbose_name = '원본메뉴'
+        verbose_name_plural = '원본메뉴'
+
+
 class MenuIngredient(models.Model):
     brand = models.CharField(max_length=64, verbose_name='브랜드')
     name = models.CharField(max_length=64, verbose_name='재료이름')
     ingredient_type = models.PositiveIntegerField(verbose_name='재료타입', default='0')
+    price = models.IntegerField(verbose_name='가격', default='0')
     ingredient_image = models.ImageField(upload_to="ingredient/", null=True, blank=True, verbose_name='재료이미지')
 
     def __str__(self):
@@ -20,7 +42,7 @@ class MenuIngredient(models.Model):
     def upload_image_delete(self, *args, **kargs):
         if self.ingredient_image:
             os.remove(os.path.join(settings.MEDIA_ROOT, self.ingredient_image.path))
-        super(Menu, self).delete(*args, **kargs)
+        super(MenuIngredient, self).delete(*args, **kargs)
 
     class Meta:
         db_table = '커스텀메뉴 재료'
@@ -33,7 +55,8 @@ class Menu(models.Model):
     # brand = models.CharField(choices=BRAND_CHOICES, null=True, max_length=64, verbose_name='브랜드')
     brand = models.CharField(max_length=64, verbose_name='브랜드')
     title = models.CharField(max_length=64, verbose_name='커스텀메뉴')
-    base_menu = models.CharField(max_length=255, verbose_name='원본메뉴')
+    # base_menu = models.CharField(max_length=255, verbose_name='원본메뉴')
+    base_menu = models.ManyToManyField(BaseMenu, related_name='base_menu', verbose_name='원본메뉴', blank=True)
     # ingredient = models.CharField(max_length=255, verbose_name='재료')
     ingredient = models.ManyToManyField(MenuIngredient, related_name='ingredient', verbose_name='재료', blank=True)
     price = models.PositiveIntegerField(verbose_name='가격', default='0')

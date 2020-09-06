@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from menu.models import Menu
+from menu.models import Menu, BaseMenu, MenuIngredient
 from taggit_serializer.serializers import TagListSerializerField, TaggitSerializer
 from taggit.models import Tag
 
@@ -19,6 +19,23 @@ class MenuSerializer(serializers.ModelSerializer):
         read_only_fields = (
             'writer',
         )
+
+
+class BaseMenuWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BaseMenu
+        fields = '__all__'
+
+
+class IngredientWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MenuIngredient
+        fields = '__all__'
+
+
+# class MenuWriteSerializer(serializers.Serializer):
+#     base_menu = BaseMenuWriteSerializer(many=True, read_only=True)
+#     ingredient = IngredientWriteSerializer(many=True, read_only=True)
 
 
 class MenuPostSerializer(TaggitSerializer, serializers.ModelSerializer):

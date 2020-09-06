@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.views import APIView, View
 from rest_framework.response import Response
-from .models import Menu
-from .serializers import MenuSerializer, MenuPostSerializer, MenuDetailSerializer, TagListSerializer
+from .models import Menu, BaseMenu, MenuIngredient
+from .serializers import MenuSerializer, MenuPostSerializer, MenuDetailSerializer, TagListSerializer, BaseMenuWriteSerializer, IngredientWriteSerializer
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse
 from rest_framework import status
@@ -22,12 +22,12 @@ from django.db.models import Q
 class MenuListView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
-    def post(self, request, format=None):
-        serializer = MenuPostSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(writer=self.request.user)
-            return Response({'data':serializer.data, 'message':'성공적으로 등록되었습니다.'}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    # def post(self, request, format=None):
+    #     serializer = MenuPostSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save(writer=self.request.user)
+    #         return Response({'data':serializer.data, 'message':'성공적으로 등록되었습니다.'}, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, format=None):
         brand = self.request.query_params.get('brand', None)
@@ -44,7 +44,7 @@ class MenuListView(APIView):
 
         if brand:
             if brand=='all':
-                queryset =  Menu.objects.exclude(deleted=True).order_by(query_sort)
+                queryset = Menu.objects.exclude(deleted=True).order_by(query_sort)
             elif brand=='subway':
                 queryset = Menu.objects.filter(brand='서브웨이').exclude(deleted=True).order_by(query_sort)
         else:
@@ -57,27 +57,32 @@ class MenuListView(APIView):
             return Response({'data':None, 'message':'등록된 메뉴가 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
 
 
-# class MenuListView(APIView):
-#     def get(self, request, brand, sort, format=None):
-#         query_sort='-created_date'
+class MenuWriteView(APIView):
+    def get(self, request, format=None):
+        brand = self.request.query_params.get('brand', None)
+        if brand is not None:
+            if brand =='subway':
+                base_menu_queryset = BaseMenu.objects.filter(brand='서브웨이')
+                ingredient_queryset = MenuIngredient.objects.filter(brand='서브웨이')
 
-#         if sort=='latest':
-#             query_sort = '-created_date'
-#         elif sort=='rank':
-#             query_sort = '-rating'
-#         elif sort=='hit':
-#             query_sort = '-hits'
+        if base_menu_queryset is not None and ingredient_queryset is not None:
+            base_menu_serializer = BaseMenuWriteSerializer(base_menu_queryset, many=True)
+            ingredient_serializer = IngredientWriteSerializer(ingredient_queryset, many=True)
 
-#         if brand=='all':
-#             queryset =  Menu.objects.exclude(deleted=True).order_by(query_sort)
-#         else:
-#             queryset = Menu.objects.filter(brand=brand).exclude(deleted=True).order_by(query_sort)
+            context = {
+                'base_menu':base_menu_serializer.data,
+                'ingredient':ingredient_serializer.data
+            }
+            # return JsonResponse(context)
+            return Response({'data':context})
 
-#         if queryset:
-#             serializer = MenuSerializer(queryset, many=True)
-#             return Response({'data':serializer.data})
-#         else:
-#             return Response({'data':None, 'message':'등록된 메뉴가 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    def post(self, request, format=None):
+            serializer = MenuPostSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save(writer=self.request.user)
+                return Response({'data':serializer.data, 'message':'성공적으로 등록되었습니다.'}, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class MenuSearchView(APIView):
@@ -152,9 +157,17 @@ class TagListView(APIView):
         return Response({'data':serializer.data})
 
     def post(self, request, format=None):
+        # tags = self.request.query_params.get('tag', None)
+        tags = self.request.GET.getlist('tag', None)
+        tagParams = []
+        if tags is not None:
+            for tag in tags:
+                tagParams.append(int(tag))
+
         user_email = self.request.user
         user = User.objects.get(email=user_email)
-        user.preference_keyword = json.loads(request.body)['preference_keyword']
+        # user.preference_keyword = json.loads(request.body)['preference_keyword']
+        user.preference_keyword = tagParams
         user.save()
         return Response({'data':user.preference_keyword,'message':'성공적으로 등록되었습니다.'})
 

@@ -14,5 +14,6 @@ urlpatterns = [
     path('like-menu/', views.LikeMenuView.as_view(), name='LikeMenuView'),
     path('write-menu/', views.WriteMenuView.as_view(), name='WriteMenuView'),
     path('search/', views.MenuSearchView.as_view(), name='MenuSearchView'),
+    path('write/', views.MenuWriteView.as_view(), name='MenuWriteView'),
     # path('<str:brand>/<str:sort>/', views.MenuListView.as_view(), name='MenuListView'),
 ]
