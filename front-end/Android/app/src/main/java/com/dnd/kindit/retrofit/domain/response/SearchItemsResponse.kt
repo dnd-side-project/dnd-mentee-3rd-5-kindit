@@ -7,7 +7,7 @@ class SearchItemsResponse : CommonResponse() {
     lateinit var data : List<Data>
 
     inner class Data {
-        var id: Long = 0L
+        var id: Int = 0
         var title: String = ""
         var writer: String = ""
         var hits: Long = 0L

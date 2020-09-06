@@ -53,12 +53,12 @@ class SearchFragment : Fragment() {
     }
 
     private fun initViewModelFun() {
-        searchViewModel.searchItemList.observe(this, Observer {
+        searchViewModel.searchItemList.observe(this, Observer { it ->
             list = ArrayList()
             for(item in it.data){
-                list.add(SearchItem(name=item.title, viewCount = item.hits, userName = item.writer, starCount = item.rating, imgPic = item.uploadImage))
+                list.add(SearchItem(id = item.id, name=item.title, viewCount = item.hits, userName = item.writer, starCount = item.rating, imgPic = item.uploadImage))
             }
-            fs_rcv_items.adapter = SearchAdapter(list)
+            fs_rcv_items.adapter = SearchAdapter(this.context!!.applicationContext, list)
             Toast.makeText(this.context, it.message, Toast.LENGTH_SHORT).show()
         })
     }
