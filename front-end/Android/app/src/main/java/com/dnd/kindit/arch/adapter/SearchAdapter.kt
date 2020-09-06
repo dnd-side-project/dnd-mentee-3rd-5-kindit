@@ -14,13 +14,10 @@ import com.bumptech.glide.Glide
 import com.dnd.kindit.R
 import com.dnd.kindit.arch.model.SearchItem
 import com.dnd.kindit.arch.view.CustomDetailsActivity
+import com.dnd.kindit.util.CommonUtils
 import com.google.android.material.card.MaterialCardView
 
 class SearchAdapter(val context: Context, val items: ArrayList<SearchItem>) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
-
-    companion object {
-        const val BASE_URL = "http://203.241.228.109:8080"
-    }
 
     inner class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var fsiIvPic = itemView.findViewById(R.id.fsi_iv_pic) as ImageView
@@ -31,7 +28,7 @@ class SearchAdapter(val context: Context, val items: ArrayList<SearchItem>) : Re
         var fsiItem = itemView.findViewById(R.id.fsi_item) as MaterialCardView
 
         fun bind(searchItem: SearchItem, context: Context) {
-            Glide.with(context).load(BASE_URL + searchItem.imgPic).into(fsiIvPic)
+            Glide.with(context).load(CommonUtils.BASE_URL + searchItem.imgPic).into(fsiIvPic)
             fsiTvName.text = searchItem.name
             fsiTvViewCount.text = "${searchItem.viewCount}회"
             fsiTvUserName.text = "by ${searchItem.userName}"
