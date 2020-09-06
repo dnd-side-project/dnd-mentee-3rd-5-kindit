@@ -1,25 +1,49 @@
 package com.dnd.kindit.arch.adapter
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.dnd.kindit.R
 import com.dnd.kindit.arch.model.SearchItem
+import com.dnd.kindit.arch.view.CustomDetailsActivity
+import com.google.android.material.card.MaterialCardView
 
-class SearchAdapter(items: ArrayList<SearchItem>): RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(){
+class SearchAdapter(val context: Context, val items: ArrayList<SearchItem>) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
-    private var items : List<SearchItem> = items
+    companion object {
+        const val BASE_URL = "http://203.241.228.109:8080"
+    }
 
-    class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var fsiIvPic = view.findViewById<View>(R.id.fsi_iv_pic) as ImageView
-        var fsiTvName = view.findViewById<View>(R.id.fsi_tv_name) as TextView
-        var fsiTvViewCount = view.findViewById<View>(R.id.fsi_tv_viewCount) as TextView
-        var fsiTvUserName = view.findViewById<View>(R.id.fsi_tv_userName) as TextView
-        var fsiRatingBar = view.findViewById<View>(R.id.fsi_rb) as RatingBar
+    inner class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var fsiIvPic = itemView.findViewById(R.id.fsi_iv_pic) as ImageView
+        var fsiTvName = itemView.findViewById(R.id.fsi_tv_name) as TextView
+        var fsiTvViewCount = itemView.findViewById(R.id.fsi_tv_viewCount) as TextView
+        var fsiTvUserName = itemView.findViewById(R.id.fsi_tv_userName) as TextView
+        var fsiRatingBar = itemView.findViewById(R.id.fsi_rb) as RatingBar
+        var fsiItem = itemView.findViewById(R.id.fsi_item) as MaterialCardView
+
+        fun bind(searchItem: SearchItem, context: Context) {
+            Glide.with(context).load(BASE_URL + searchItem.imgPic).into(fsiIvPic)
+            fsiTvName.text = searchItem.name
+            fsiTvViewCount.text = "${searchItem.viewCount}회"
+            fsiTvUserName.text = "by ${searchItem.userName}"
+            fsiRatingBar.rating = searchItem.starCount
+
+            fsiItem.setOnClickListener {
+                val intent = Intent(context, CustomDetailsActivity::class.java)
+                intent.putExtra("id", searchItem.id)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                context.startActivity(intent)
+            }
+        }
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -31,11 +55,7 @@ class SearchAdapter(items: ArrayList<SearchItem>): RecyclerView.Adapter<SearchAd
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        // Glide 적용 holder.fsiIvPic
-        holder.fsiTvName.text = items[position].name
-        holder.fsiTvViewCount.text = "${items[position].viewCount}회"
-        holder.fsiTvUserName.text = "by ${items[position].userName}"
-        holder.fsiRatingBar.rating = items[position].starCount.toFloat()
+        holder.bind(items[position], context)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
