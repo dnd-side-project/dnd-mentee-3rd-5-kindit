@@ -59,7 +59,6 @@ class SearchFragment : Fragment() {
                 list.add(SearchItem(id = item.id, name=item.title, viewCount = item.hits, userName = item.writer, starCount = item.rating, imgPic = item.uploadImage))
             }
             fs_rcv_items.adapter = SearchAdapter(this.context!!.applicationContext, list)
-            Toast.makeText(this.context, it.message, Toast.LENGTH_SHORT).show()
         })
     }
 

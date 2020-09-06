@@ -33,4 +33,9 @@
     <string name="fs_edtl_serach">브랜드 혹은 메뉴명으로 검색보세요.</string>
     <string name="fsi_tv_rb">별점</string>
     <string name="fs_edt_search">브랜드 혹은 메뉴명으로 검색해보세요.</string>
+    <string name="cd_tv_cost">가격</string>
+    <string name="cd_tv_tip">업로드자 한마디</string>
+    <string name="cd_tv_option">선택옵션</string>
+    <string name="cd_tv_tag">해시태그</string>
+    <string name="cd_tv_rating">레시피를 평가해주세요 :)</string>
 </resources>
