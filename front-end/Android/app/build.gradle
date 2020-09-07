@@ -64,4 +64,6 @@ dependencies {
     // Glide 이미지 처리 관련 라이브러리
     implementation 'com.github.bumptech.glide:glide:4.11.0'
 
+    // 갤러리 권한 가져오기
+    implementation "gun0912.ted:tedpermission:2.1.0"
 }
