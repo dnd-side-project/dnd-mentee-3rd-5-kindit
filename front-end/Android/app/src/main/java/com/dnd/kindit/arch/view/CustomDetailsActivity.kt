@@ -70,7 +70,7 @@ class CustomDetailsActivity : AppCompatActivity() {
             tagList = ArrayList()
 
             for(item in it.data.ingredient){
-                optionList.add(CustomDetailOptionItem(item, item))
+                optionList.add(CustomDetailOptionItem(item.ingredientImage, item.name))
             }
             for(item in it.data.tags){
                 tagList.add(CustomDetailTagItem(item))
