@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/iv_menu_close"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@android:color/transparent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_round_chevron_left_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_sandwich_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="서브웨이 클럽"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:background="#d7d7d7"
+        app:layout_constraintTop_toBottomOf="@+id/iv_menu_close" />
+
+    <ImageView
+        android:id="@+id/iv_sandwich"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="60dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sample_sandwitch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+    <View
+        android:id="@+id/view100"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginTop="32dp"
+        android:background="#d7d7d7"
+        app:layout_constraintTop_toBottomOf="@+id/iv_sandwich" />
+
+    <TextView
+        android:id="@+id/tv_just_option"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:textSize="16sp"
+        android:textColor="@color/kinditMainColor1"
+        android:text="@string/my_tv_just_option"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view100" />
+
+    <TextView
+        android:id="@+id/tv_just_bread"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/my_tv_just_bread"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="@+id/tv_just_option"
+        app:layout_constraintTop_toBottomOf="@+id/tv_just_option" />
+
+    <TextView
+        android:id="@+id/tv_just_sauce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/my_tv_just_sauce"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="@+id/tv_just_option"
+        app:layout_constraintTop_toBottomOf="@+id/tv_just_bread" />
+
+    <TextView
+        android:id="@+id/tv_just_option3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="옵션선택3"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="@+id/tv_just_option"
+        app:layout_constraintTop_toBottomOf="@+id/tv_just_sauce" />
+
+    <View
+        android:id="@+id/view101"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginTop="32dp"
+        android:background="#d7d7d7"
+        app:layout_constraintTop_toBottomOf="@+id/tv_just_option3" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/my_tv_just_price"
+        android:textColor="@color/kinditMainColor1"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view101" />
+
+    <TextView
+        android:id="@+id/tv_myself_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="6300원"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textView15"
+        app:layout_constraintTop_toTopOf="@+id/textView15" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/my_tv_overlap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_myself_price" />
+
+    <Button
+        android:id="@+id/btn_my_home"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/myself_custom_round_btn"
+        android:text="@string/my_tv_upload"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_my_next"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_my_next"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/myself_custom_round_btn_grey"
+        android:text="@string/my_tv_home"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_my_home" />
+</androidx.constraintlayout.widget.ConstraintLayout>

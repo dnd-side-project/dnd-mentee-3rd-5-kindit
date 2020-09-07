@@ -32,4 +32,14 @@
     <string name="ct_tv_item">서브웨이</string>
     <string name="fs_edtl_serach">브랜드 혹은 메뉴명으로 검색보세요.</string>
     <string name="fsi_tv_rb">별점</string>
+
+    <string name="my_btn_next">다음 단계로</string>
+    <string name="my_tv_just_option">옵션 선택</string>
+    <string name="my_tv_just_bread">빵 선택</string>
+    <string name="my_tv_just_sauce">소스 선택</string>
+    <string name="my_tv_just_price">최종가격</string>
+    <string name="my_tv_overlap">아직 업로드 되지않은 레시피입니다 공유해주시겠어요? :)</string>
+    <string name="my_tv_home">홈으로</string>
+    <string name="my_tv_upload">업로드</string>
+
 </resources>
