@@ -37,6 +37,7 @@ class CustomDetailsViewModel : ViewModel() {
                     val responseBody = response.body()
                     if (responseBody?.result == "success") {
                         _detailMenu.value = responseBody
+                        Log.d("test", responseBody.toString())
                     }
                 } else {
                     val responseErrorBody = GsonBuilder().create()

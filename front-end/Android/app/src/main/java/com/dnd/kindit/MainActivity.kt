@@ -11,8 +11,6 @@ import androidx.core.view.GravityCompat
 import com.dnd.kindit.arch.view.SearchFragment
 import com.dnd.kindit.arch.view.CommunityFragment
 import com.dnd.kindit.main.MainFragment
-import com.dnd.kindit.arch.view.SearchFragment
-import com.dnd.kindit.main.MyselfFragment
 import com.dnd.kindit.arch.view.ProfileActivity
 import com.dnd.kindit.view.encyclopedia.EncyclopediaFragment
 import com.dnd.kindit.view.myself.MyselfFragment
