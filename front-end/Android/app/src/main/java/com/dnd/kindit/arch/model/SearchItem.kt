@@ -1,13 +1,15 @@
 package com.dnd.kindit.arch.model
 
 class SearchItem {
+    var id: Int = 0
     var name: String = ""
     var viewCount: Long = 0L
     var userName: String = ""
-    var starCount: Long = 0L
-    var imgPic: String = ""
+    var starCount: Float = 0.0f
+    var imgPic: String? = ""
 
-    constructor(name: String, viewCount: Long, userName: String, starCount: Long, imgPic: String) {
+    constructor(id: Int, name: String, viewCount: Long, userName: String, starCount: Float, imgPic: String?) {
+        this.id = id
         this.name = name
         this.viewCount = viewCount
         this.userName = userName
@@ -16,6 +18,8 @@ class SearchItem {
     }
 
     override fun toString(): String {
-        return "SearchItem(name='$name', viewCount=$viewCount, userName='$userName', starCount=$starCount, imgPic='$imgPic')"
+        return "SearchItem(id=$id, name='$name', viewCount=$viewCount, userName='$userName', starCount=$starCount, imgPic=$imgPic)"
     }
+
+
 }

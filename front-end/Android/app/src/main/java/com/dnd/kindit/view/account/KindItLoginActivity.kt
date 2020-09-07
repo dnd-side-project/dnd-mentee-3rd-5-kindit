@@ -30,9 +30,6 @@ class KindItLoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kindit_login)
 
-        // 첫 사용자 태그 입력 하는 페이지 구현
-        startActivity(Intent(applicationContext, FavoriteInitTagActivity::class.java))
-
         init()
 
         initListener()
@@ -77,11 +74,17 @@ class KindItLoginActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             val responseBody = response.body()
                             if (responseBody?.result == "success") {
+
+                                // 앱을 깔고 처음으로 등록한 사용자라면
+                                if(!PreferenceManager.getBoolean(applicationContext, "fav_tag_check")){
+                                    startActivity(Intent(applicationContext, FavoriteInitTagActivity::class.java))
+                                }else{
+                                    startActivity(Intent(applicationContext, MainActivity::class.java))
+                                }
+                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                                 // token 저장해야함
                                 PreferenceManager.setString(applicationContext, "kindit_token", responseBody.user.token)
-
-                                startActivity(Intent(applicationContext, MainActivity::class.java))
-                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                                finish()
                             }
                         }else{
                             val responseErrorBody = GsonBuilder().create().fromJson(response.errorBody()?.string(), CommonResponse::class.java)
