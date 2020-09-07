@@ -9,7 +9,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.dnd.kindit.arch.view.SearchFragment
-import com.dnd.kindit.config.CommunityFragment
+import com.dnd.kindit.arch.view.CommunityFragment
 import com.dnd.kindit.main.MainFragment
 import com.dnd.kindit.main.MyselfFragment
 import com.dnd.kindit.arch.view.ProfileActivity

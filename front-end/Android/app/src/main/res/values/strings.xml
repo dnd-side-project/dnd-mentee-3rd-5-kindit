@@ -38,4 +38,7 @@
     <string name="cd_tv_option">선택옵션</string>
     <string name="cd_tv_tag">해시태그</string>
     <string name="cd_tv_rating">레시피를 평가해주세요 :)</string>
+    <string name="cw_tv_save">완료</string>
+    <string name="cw_btn_load">이미지 업로드하기 +</string>
+    <string name="cw_edt_text">글을 작성해주세요 :)</string>
 </resources>
