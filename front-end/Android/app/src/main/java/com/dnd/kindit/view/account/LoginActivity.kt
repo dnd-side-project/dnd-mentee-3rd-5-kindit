@@ -5,7 +5,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.dnd.kindit.MainActivity
 import com.dnd.kindit.R
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class LoginActivity : AppCompatActivity() {
@@ -36,6 +38,12 @@ class LoginActivity : AppCompatActivity() {
         // 회원 가입을 눌렀을 경우
         login_tv_sign_up.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
+        }
+
+        // 소셜로 로그인 버튼
+        login_btn_social.setOnClickListener {
+            Snackbar.make(contentContainer, "제작중인 서비스입니다 TT", Snackbar.LENGTH_SHORT).setAction("확인"){
+            }.show()
         }
     }
 }
