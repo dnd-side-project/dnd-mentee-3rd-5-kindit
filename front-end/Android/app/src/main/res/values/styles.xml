@@ -11,7 +11,7 @@
     <style name="TabTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@android:color/white</item>                      <!-- 배경 -->
         <item name="android:textColorPrimary">@color/kinditMainColor1</item>       <!-- 탭바 선택된 텍스트 -->
-        <item name="android:textColorSecondary">@android:color/black</item>     <!-- 탭바 텍스트 -->
+        <item name="android:textColorSecondary">@color/kinditMainColor1</item>     <!-- 탭바 텍스트 -->
         <item name="colorAccent">@color/kinditMainColor1</item>                    <!-- 하단 움직이는 바 색-->
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowTranslucentStatus">true</item>
@@ -24,4 +24,20 @@
         <item name="colorControlNormal">@color/ratingOffColor</item>
         <item name="colorControlActivated">@color/ratingOnColor</item>
     </style>
+
+    <style name="BottomTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="bottomNavigationStyle">@style/Widget.MaterialComponents.BottomNavigationView.Colored</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+
 </resources>

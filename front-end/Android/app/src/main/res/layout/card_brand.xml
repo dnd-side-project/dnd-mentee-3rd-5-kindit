@@ -40,14 +40,13 @@
             android:id="@+id/tv_myself_brand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="300dp"
             android:text="tv_brand"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_myself_logo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
