@@ -65,6 +65,7 @@ THIRD_PARTY_APP = [
 PROJECT_APPS = [
     'accounts.apps.AccountsConfig',
     'menu.apps.MenuConfig',
+    'community.apps.CommunityConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APP

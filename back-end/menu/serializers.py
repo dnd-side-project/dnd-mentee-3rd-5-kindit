@@ -40,8 +40,8 @@ class IngredientWriteSerializer(serializers.ModelSerializer):
 
 class MenuPostSerializer(TaggitSerializer, serializers.ModelSerializer):
     tags = TagListSerializerField()
-    base_menu = serializers.ListField(child=serializers.CharField(max_length=255))
-    ingredient = serializers.ListField(child=serializers.CharField(max_length=255))
+    # base_menu = serializers.ListField(child=serializers.CharField(max_length=255))
+    # ingredient = serializers.ListField(child=serializers.CharField(max_length=255))
     writer = serializers.CharField(source="writer.nickname", read_only=True)
     likes_count = serializers.IntegerField(source="total_likes", read_only=True)
 
@@ -60,6 +60,10 @@ class MenuDetailSerializer(serializers.ModelSerializer):
     tags = TagListSerializerField()
     writer = serializers.CharField(source="writer.nickname", read_only=True)
     likes_count = serializers.IntegerField(source="total_likes", read_only=True)
+
+    base_menu = BaseMenuWriteSerializer(many=True)
+    ingredient = IngredientWriteSerializer(many=True)
+
     class Meta:
         model = Menu
         fields = '__all__'

@@ -17,6 +17,7 @@ from django.db.models import Count
 from accounts.models import CustomUser as User
 import json
 from django.db.models import Q
+from rest_framework.parsers import MultiPartParser, JSONParser
 
 
 class MenuListView(APIView):
@@ -58,6 +59,8 @@ class MenuListView(APIView):
 
 
 class MenuWriteView(APIView):
+    # parser_classes = (MultiPartParser, JSONParser,)
+
     def get(self, request, format=None):
         brand = self.request.query_params.get('brand', None)
         if brand is not None:
@@ -73,16 +76,14 @@ class MenuWriteView(APIView):
                 'base_menu':base_menu_serializer.data,
                 'ingredient':ingredient_serializer.data
             }
-            # return JsonResponse(context)
             return Response({'data':context})
 
-
     def post(self, request, format=None):
-            serializer = MenuPostSerializer(data=request.data)
-            if serializer.is_valid():
-                serializer.save(writer=self.request.user)
-                return Response({'data':serializer.data, 'message':'성공적으로 등록되었습니다.'}, status=status.HTTP_201_CREATED)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = MenuPostSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(writer=self.request.user)
+            return Response({'data':serializer.data, 'message':'성공적으로 등록되었습니다.'}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class MenuSearchView(APIView):
@@ -91,8 +92,8 @@ class MenuSearchView(APIView):
         if len(keyword) > 1 :
             queryset = Menu.objects.filter(
                 Q (brand__icontains=keyword) |
-                Q (title__icontains=keyword) |
-                Q (base_menu__icontains=keyword)
+                Q (title__icontains=keyword)
+                # Q (base_menu__icontains=keyword)
             ).exclude(deleted=True).order_by('-created_date')
 
             if queryset:

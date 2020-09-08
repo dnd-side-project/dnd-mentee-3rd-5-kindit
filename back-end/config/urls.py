@@ -25,6 +25,7 @@ urlpatterns = [
     path("api-doc/", include("config.yasg_urls")),
     path("api/accounts/", include("accounts.urls")),
     path("api/menu/", include("menu.urls")),
+    path("api/community/", include("community.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
