@@ -83,7 +83,7 @@ class KindItLoginActivity : AppCompatActivity() {
                                 }
                                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                                 // token 저장해야함
-                                PreferenceManager.setString(applicationContext, "kindit_token", responseBody.user.token)
+                                PreferenceManager.setString(applicationContext, "kindit_token", "jwt ${responseBody.user.token}")
                                 finish()
                             }
                         }else{

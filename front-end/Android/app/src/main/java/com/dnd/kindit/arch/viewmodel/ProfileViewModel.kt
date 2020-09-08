@@ -35,8 +35,7 @@ class ProfileViewModel : ViewModel() {
         val token = PreferenceManager.getString(context, "kindit_token").toString()
 
         val profileService = RetrofitClient.kindItAccountService()
-        val profileCall =
-            profileService.getUserProfile("jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6Im1zbm8yQG5hdmVyLmNvbSIsImV4cCI6MTU5OTU4MzE4NCwiZW1haWwiOiJtc25vMkBuYXZlci5jb20iLCJvcmlnX2lhdCI6MTU5ODk3ODM4NH0.xNyzxIONa1Z5DbTaKMWPqCU3IufSjE3QlLmKtOAdaIA")
+        val profileCall = profileService.getUserProfile(token)
 
         profileCall.enqueue(object : retrofit2.Callback<UserResponse> {
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
@@ -63,7 +62,7 @@ class ProfileViewModel : ViewModel() {
         val token = PreferenceManager.getString(context, "kindit_token").toString()
         val profileService = RetrofitClient.kindItAccountService()
         val profileCall = profileService.modifyUserProfile(
-            "jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6Im1zbm8yQG5hdmVyLmNvbSIsImV4cCI6MTU5OTU4MzE4NCwiZW1haWwiOiJtc25vMkBuYXZlci5jb20iLCJvcmlnX2lhdCI6MTU5ODk3ODM4NH0.xNyzxIONa1Z5DbTaKMWPqCU3IufSjE3QlLmKtOAdaIA",
+            token,
             ProfileUpdateRequest(nickname)
         )
 

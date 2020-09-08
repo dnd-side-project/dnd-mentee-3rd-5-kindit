@@ -18,7 +18,9 @@ import com.dnd.kindit.arch.model.CustomDetailTagItem
 import com.dnd.kindit.arch.viewmodel.CustomDetailsViewModel
 import com.dnd.kindit.arch.viewmodel.SearchViewModel
 import com.dnd.kindit.util.CommonUtils
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_custom_details.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class CustomDetailsActivity : AppCompatActivity() {
     private val TAG = this.javaClass.toString()
@@ -89,7 +91,7 @@ class CustomDetailsActivity : AppCompatActivity() {
         }
 
         ccd_img_eval.setOnClickListener {
-            Toast.makeText(this, "불편을 드려서 죄송합니다.\n곧 여러분을 찾아 뵙겠습니다!", Toast.LENGTH_LONG).show()
+            Snackbar.make(cd_ll_main, "불편을 드려서 죄송합니다.\n곧 여러분을 찾아 뵙겠습니다!", Snackbar.LENGTH_SHORT).show()
         }
     }
 }

@@ -15,6 +15,8 @@ import com.dnd.kindit.R
 import com.dnd.kindit.arch.adapter.SearchAdapter
 import com.dnd.kindit.arch.model.SearchItem
 import com.dnd.kindit.arch.viewmodel.SearchViewModel
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.fragment_search.*
 
@@ -54,11 +56,15 @@ class SearchFragment : Fragment() {
 
     private fun initViewModelFun() {
         searchViewModel.searchItemList.observe(this, Observer { it ->
-            list = ArrayList()
-            for(item in it.data){
-                list.add(SearchItem(id = item.id, name=item.title, viewCount = item.hits, userName = item.writer, starCount = item.rating, imgPic = item.uploadImage))
+            if(it.result == "fail"){
+                Snackbar.make(fs_ll_main, it.message, Snackbar.LENGTH_SHORT).show()
+            }else{
+                list = ArrayList()
+                for(item in it.data){
+                    list.add(SearchItem(id = item.id, name=item.title, viewCount = item.hits, userName = item.writer, starCount = item.rating, imgPic = item.uploadImage))
+                }
+                fs_rcv_items.adapter = SearchAdapter(this.context!!.applicationContext, list)
             }
-            fs_rcv_items.adapter = SearchAdapter(this.context!!.applicationContext, list)
         })
     }
 

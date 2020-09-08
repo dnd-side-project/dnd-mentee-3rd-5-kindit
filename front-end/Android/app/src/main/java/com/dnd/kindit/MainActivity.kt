@@ -8,15 +8,24 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import com.dnd.kindit.arch.view.SearchFragment
 import com.dnd.kindit.arch.view.CommunityFragment
-import com.dnd.kindit.main.MainFragment
 import com.dnd.kindit.arch.view.ProfileActivity
+import com.dnd.kindit.arch.view.SearchFragment
+import com.dnd.kindit.main.MainFragment
+import com.dnd.kindit.retrofit.RetrofitClient
+import com.dnd.kindit.retrofit.domain.response.CommonResponse
+import com.dnd.kindit.retrofit.domain.response.UserResponse
+import com.dnd.kindit.util.PreferenceManager
 import com.dnd.kindit.view.encyclopedia.EncyclopediaFragment
 import com.dnd.kindit.view.myself.MyselfFragment
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.header.*
 import kotlinx.android.synthetic.main.header.view.*
+import retrofit2.Call
+import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -34,15 +43,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         val headerView = nav_view.getHeaderView(0)
-        val profileName = headerView.findViewById(R.id.tv_profileName) as TextView
-        profileName.text = "김페페님"
 
         headerView.menu_close.setOnClickListener {
             drawer_layout.closeDrawer(GravityCompat.START)
         }
 
         // 프로필 수정하기 위한 페이지로 이동 header 클릭시 이동
-        headerView.layout_header.setOnClickListener {
+        headerView.ibtn_modify.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
 
@@ -73,11 +80,42 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     .commitAllowingStateLoss()
                 R.id.searchItem -> transaction.replace(R.id.contentContainer, searchFragment)
                     .commitAllowingStateLoss()
-                R.id.communityItem -> transaction.replace(R.id.contentContainer, communityFragment)
-                    .commitAllowingStateLoss()
+                R.id.communityItem ->
+                    Snackbar.make(contentContainer, "제작중인 서비스입니다 TT", Snackbar.LENGTH_SHORT).setAction("확인"){
+                    }.show()
+//                    transaction.replace(R.id.contentContainer, communityFragment)
+//                    .commitAllowingStateLoss()
             }
             return@setOnNavigationItemSelectedListener true
         }
+
+        setData()
+    }
+
+    private fun setData() {
+        val token = PreferenceManager.getString(this, "kindit_token").toString()
+
+        val profileService = RetrofitClient.kindItAccountService()
+        val profileCall = profileService.getUserProfile(token)
+
+        profileCall.enqueue(object : retrofit2.Callback<UserResponse> {
+            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                Log.e(TAG, t.message.toString())
+            }
+
+            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody?.result == "success") {
+                        tv_profileName.text = "${responseBody.user.nickname}님"
+                    }
+                } else {
+                    val responseErrorBody = GsonBuilder().create()
+                        .fromJson(response.errorBody()?.string(), CommonResponse::class.java)
+                    Log.d(TAG, responseErrorBody.toString())
+                }
+            }
+        })
     }
 
     override fun onBackPressed() {
@@ -90,8 +128,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.menu_bookmark -> Log.e(TAG, "북마크")
-            R.id.menu_settings -> Log.e(TAG, "설정")
+            R.id.menu_bookmark -> Snackbar.make(contentContainer, "제작중인 서비스입니다 TT", Snackbar.LENGTH_SHORT).setAction("확인"){
+            }.show()
+            R.id.menu_settings -> Snackbar.make(contentContainer, "제작중인 서비스입니다 TT", Snackbar.LENGTH_SHORT).setAction("확인"){
+            }.show()
+            R.id.menu_write -> Snackbar.make(contentContainer, "제작중인 서비스입니다 TT", Snackbar.LENGTH_SHORT).setAction("확인"){
+            }.show()
+            R.id.menu_recipe -> Snackbar.make(contentContainer, "제작중인 서비스입니다 TT", Snackbar.LENGTH_SHORT).setAction("확인"){
+            }.show()
+            R.id.menu_logout ->
+                finish()
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)

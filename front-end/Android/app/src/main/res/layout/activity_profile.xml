@@ -77,5 +77,5 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView7"
         app:layout_constraintStart_toStartOf="@+id/imageView7"
         app:layout_constraintTop_toTopOf="@+id/imageView7"
-        app:srcCompat="@drawable/pepe" />
+        app:srcCompat="@drawable/background" />
 </androidx.constraintlayout.widget.ConstraintLayout>
