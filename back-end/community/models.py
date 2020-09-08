@@ -12,7 +12,7 @@ class Community(models.Model):
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='community_likes', verbose_name='좋아요', blank=True)
     hits = models.PositiveIntegerField(verbose_name='조회수', default=0)
     comments = models.PositiveIntegerField(verbose_name='댓글수', default=0)
-    community_image = models.ImageField(upload_to="community/%Y/%m/%d", null=True, blank=True, verbose_name='커뮤니티이미지')
+    upload_image = models.ImageField(upload_to="community/%Y/%m/%d", null=True, blank=True, verbose_name='커뮤니티이미지')
     created_date = models.DateTimeField(auto_now_add=True, verbose_name='등록일')
     updated_date = models.DateTimeField(auto_now=True, verbose_name='수정일')
     deleted = models.BooleanField(default=False, verbose_name='삭제여부')
@@ -41,8 +41,8 @@ class Community(models.Model):
             return False
  
     def upload_image_delete(self, *args, **kargs):
-        if self.community_image:
-            os.remove(os.path.join(settings.MEDIA_ROOT, self.community_image.path))
+        if self.upload_image:
+            os.remove(os.path.join(settings.MEDIA_ROOT, self.upload_image.path))
         super(Community, self).delete(*args, **kargs)
 
     class Meta:
