@@ -14,14 +14,8 @@ import kotlinx.android.synthetic.main.fragment_encyclopedia_object.view.*
 class EncyclopediaObjectFragment : Fragment() {
 
     private val ARG_OBJECT = "object"
-    private var encyclopediaCardList = arrayListOf<EncyclopediaCardList>(
-        EncyclopediaCardList("샌드위치1","김명석","1,200"),
-        EncyclopediaCardList("샌드위치2","백경민","36"),
-        EncyclopediaCardList("샌드위치3","당현아","2,000"),
-        EncyclopediaCardList("샌드위치4","박현채","100"),
-        EncyclopediaCardList("샌드위치5","장재우","0"),
-        EncyclopediaCardList("샌드위치6","김씨","20"),
-        EncyclopediaCardList("샌드위치7","박씨","30")
+    var EncyclopediaList = arrayListOf<EncyclopediaCardList>(
+        EncyclopediaCardList("샌드위치1","김페페","1,200")
     )
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -31,7 +25,7 @@ class EncyclopediaObjectFragment : Fragment() {
         encyclopediaListView.rv_encyclopediaCard.let {
             it.layoutManager = layoutManager
             it.itemAnimator = DefaultItemAnimator()
-            it.adapter = EncyclopediaListAdapter( encyclopediaCardList)
+            it.adapter = EncyclopediaListAdapter(EncyclopediaList)
         }
         return  encyclopediaListView
     }
