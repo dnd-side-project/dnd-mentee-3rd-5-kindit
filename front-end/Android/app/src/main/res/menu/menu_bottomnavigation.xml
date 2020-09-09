@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/homeItem"
+        android:icon="@drawable/my_tab_icon_home"
+        android:title="홈" />
+    <item
         android:id="@+id/myselfItem"
         android:icon="@drawable/my_tab_icon_myself"
         android:title="마이셀프" />
+
     <item
         android:id="@+id/encyclopediaItem"
         android:icon="@drawable/my_tab_icon_encyclopedia"
         android:enabled="true"
         android:title="백과사전" />
-    <item
-        android:id="@+id/homeItem"
-        android:icon="@drawable/my_tab_icon_home"
-        android:title="홈" />
 
     <item
         android:id="@+id/searchItem"
