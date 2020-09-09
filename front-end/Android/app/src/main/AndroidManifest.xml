@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.community.CommunityDetailActivity"></activity>
+        <activity android:name=".arch.view.CommunityDetailActivity"></activity>
         <activity android:name=".view.community.CommunityWriteActivity" />
         <activity android:name=".arch.view.CustomDetailsActivity" />
         <activity android:name=".arch.view.ProfileActivity" />

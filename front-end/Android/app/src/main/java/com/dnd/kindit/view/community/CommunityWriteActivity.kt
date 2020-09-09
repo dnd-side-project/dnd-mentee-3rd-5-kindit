@@ -32,21 +32,28 @@ class CommunityWriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_community_write)
 
-//        tedPermission()
-//
-//        getImageToAlbum()
+        tedPermission()
+
+        initListener()
+    }
+
+    private fun initListener() {
+        cw_btn_load.setOnClickListener {
+            getImageToAlbum()
+        }
+        cw_tv_upload.setOnClickListener {
+
+        }
     }
 
     private fun tedPermission() {
         val permissionListener = object : PermissionListener {
             override fun onPermissionGranted() {
                 // 권한 요청 성공
-                Toast.makeText(applicationContext, "돼", Toast.LENGTH_SHORT).show()
             }
 
             override fun onPermissionDenied(deniedPermissions: ArrayList<String>?) {
                 // 권한 요청 실패
-                Toast.makeText(applicationContext, "안돼", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -81,6 +88,8 @@ class CommunityWriteActivity : AppCompatActivity() {
                 cursor.moveToFirst()
 
                 tempFile = File(cursor.getString(columnIndex))
+
+                setImage()
             }catch (e: Exception){
                 Toast.makeText(this, "이미지 처리중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
                 Log.e(TAG, e.message.toString())
@@ -88,7 +97,6 @@ class CommunityWriteActivity : AppCompatActivity() {
                 cursor?.close()
             }
         }
-        setImage()
     }
 
     private fun setImage() {
