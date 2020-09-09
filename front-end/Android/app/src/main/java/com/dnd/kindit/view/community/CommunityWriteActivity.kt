@@ -32,9 +32,9 @@ class CommunityWriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_community_write)
 
-        tedPermission()
-
-        getImageToAlbum()
+//        tedPermission()
+//
+//        getImageToAlbum()
     }
 
     private fun tedPermission() {
