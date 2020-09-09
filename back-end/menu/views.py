@@ -79,6 +79,14 @@ class MenuWriteView(APIView):
             return Response({'data':context})
 
     def post(self, request, format=None):
+        price = 0
+        price += BaseMenu.objects.get(pk=request.data['base_menu']).price
+
+        for i in request.data.getlist('ingredient', None):
+            price += MenuIngredient.objects.get(pk=i).price
+
+        request.data['price'] = price
+
         serializer = MenuPostSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(writer=self.request.user)
@@ -125,6 +133,12 @@ class MenuDetailView(APIView):
         writer = self.request.user
         try:
             menu = Menu.objects.get(pk=pk, writer=writer)
+            price = 0
+            price += BaseMenu.objects.get(pk=request.data['base_menu']).price
+            for i in request.data.getlist('ingredient', None):
+                price += MenuIngredient.objects.get(pk=i).price
+            request.data['price'] = price
+
         except Menu.DoesNotExist:
             return Response({'data':None, 'message':'본인 게시글이 아닙니다.'}, status=status.HTTP_401_UNAUTHORIZED)
 
