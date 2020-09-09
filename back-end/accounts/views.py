@@ -31,6 +31,11 @@ from django.contrib.auth import get_user_model
 from rest_framework_jwt.settings import api_settings
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 
+from menu.models import Menu
+from menu.serializers import MenuSerializer
+from community.models import Community
+from community.serializers import CommunitySerializer
+
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -361,3 +366,33 @@ class JSONWebTokenAPIView(APIView):
 
 class VerifyJSONWebToken(JSONWebTokenAPIView):
     serializer_class = VerifyJSONWebTokenSerializer
+
+
+class LikeMenuView(APIView):
+    def get(self, request, format=None):
+        queryset = Menu.objects.filter(likes=request.user.id).exclude(deleted=True)
+        if queryset:
+            serializer = MenuSerializer(queryset, many=True)
+            return Response({'data':serializer.data})
+        else:
+            return Response({'data':None, 'message':'찜한 메뉴가 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class WriteMenuView(APIView):
+    def get(self, request, format=None):
+        queryset = Menu.objects.filter(writer=request.user.id).exclude(deleted=True)
+        if queryset:
+            serializer = MenuSerializer(queryset, many=True)
+            return Response({'data':serializer.data})
+        else:
+            return Response({'data':None, 'message':'작성한 메뉴가 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class WriteCommunityView(APIView):
+    def get(self, request, format=None):
+        queryset = Community.objects.filter(writer=request.user.id).exclude(deleted=True)
+        if queryset:
+            serializer = CommunitySerializer(queryset, many=True)
+            return Response({'data':serializer.data})
+        else:
+            return Response({'data':None, 'message':'작성한 커뮤니티글이 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)

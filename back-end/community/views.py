@@ -89,13 +89,3 @@ class CommunityLikeView(APIView):
                 return Response({'data':None, 'message':'해당 게시글에 좋아요를 눌렀습니다.'}, status=status.HTTP_200_OK)
 
         return Response({'data':None, 'message':'본인 게시글은 좋아요 할 수 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
-
-
-# class WriteMenuView(APIView):
-#     def get(self, request, format=None):
-#         queryset = Menu.objects.filter(writer=request.user.id).exclude(deleted=True)
-#         if queryset:
-#             serializer = MenuSerializer(queryset, many=True)
-#             return Response({'data':serializer.data})
-#         else:
-#             return Response({'data':None, 'message':'작성한 메뉴가 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)

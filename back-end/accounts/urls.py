@@ -22,4 +22,8 @@ urlpatterns = [
     path('password-reset/', views.PasswordResetView.as_view(), name='password-reset'),
     path('confirm-password-reset/<str:token>/', views.confirm_password_reset_view, name='password-reset-activate'),
     path('password-change/', views.PasswordChangeView.as_view(), name='password-change'),
+    
+    path('like-menu/', views.LikeMenuView.as_view(), name='LikeMenuView'),
+    path('write-menu/', views.WriteMenuView.as_view(), name='WriteMenuView'),
+    path('write-community/', views.WriteCommunityView.as_view(), name='WriteCommunityView'),
 ]

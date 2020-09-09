@@ -222,23 +222,3 @@ class MenuRatingView(APIView):
                 return Response({'data':None, 'message':'해당 메뉴에 별점을 등록했습니다.'}, status=status.HTTP_200_OK)
 
         return Response({'data':None, 'message':'본인 메뉴에는 별점을 등록할 수 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
-
-
-class LikeMenuView(APIView):
-    def get(self, request, format=None):
-        queryset = Menu.objects.filter(likes=request.user.id).exclude(deleted=True)
-        if queryset:
-            serializer = MenuSerializer(queryset, many=True)
-            return Response({'data':serializer.data})
-        else:
-            return Response({'data':None, 'message':'찜한 메뉴가 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
-
-
-class WriteMenuView(APIView):
-    def get(self, request, format=None):
-        queryset = Menu.objects.filter(writer=request.user.id).exclude(deleted=True)
-        if queryset:
-            serializer = MenuSerializer(queryset, many=True)
-            return Response({'data':serializer.data})
-        else:
-            return Response({'data':None, 'message':'작성한 메뉴가 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
