@@ -80,11 +80,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     .commitAllowingStateLoss()
                 R.id.searchItem -> transaction.replace(R.id.contentContainer, searchFragment)
                     .commitAllowingStateLoss()
-                R.id.communityItem ->
-                    Snackbar.make(contentContainer, "제작중인 서비스입니다 TT", Snackbar.LENGTH_SHORT).setAction("확인"){
-                    }.show()
-//                    transaction.replace(R.id.contentContainer, communityFragment)
-//                    .commitAllowingStateLoss()
+                R.id.communityItem -> transaction.replace(R.id.contentContainer, communityFragment)
+                    .commitAllowingStateLoss()
             }
             return@setOnNavigationItemSelectedListener true
         }

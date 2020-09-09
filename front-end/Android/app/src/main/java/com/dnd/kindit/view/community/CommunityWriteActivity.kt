@@ -11,7 +11,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
 import com.dnd.kindit.R
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
@@ -62,7 +61,9 @@ class CommunityWriteActivity : AppCompatActivity() {
     private fun getImageToAlbum() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = MediaStore.Images.Media.CONTENT_TYPE
-        startActivityForResult(intent, PICK_FROM_ALBUM)
+        startActivityForResult(intent,
+            PICK_FROM_ALBUM
+        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
