@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".arch.view.CommunityDetailActivity">
+
+    <ImageView
+        android:id="@+id/cmd_img_back"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
+
+    <ImageView
+        android:id="@+id/ccd_img_menu"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cmd_img_back" />
+
+    <ImageView
+        android:id="@+id/ccd_img_profile"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ccd_img_menu"
+        app:srcCompat="@drawable/background" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/ccd_img_profile"
+        app:layout_constraintStart_toEndOf="@+id/ccd_img_profile"
+        app:layout_constraintTop_toTopOf="@+id/ccd_img_profile">
+
+        <TextView
+            android:id="@+id/ccd_tv_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="OOO님"
+            android:textColor="#000000"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/ccd_tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="n 일전"
+            android:textColor="#4d000000"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/ccd_tv_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:text="추천받은 레시피로 먹어봤는데 생각보다 맛있었네요!\n앞으로 자주 먹어야...."
+        android:textColor="#000000"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ccd_img_profile" />
+
+    <ImageView
+        android:id="@+id/ccd_img_like"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ccd_img_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ccd_img_profile"
+        app:srcCompat="@drawable/post_icon_likebig" />
+
+    <TextView
+        android:id="@+id/ccd_tv_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="좋아요0"
+        android:textColor="#4d000000"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/ccd_tv_reply"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ccd_tv_content" />
+
+    <TextView
+        android:id="@+id/ccd_tv_reply"
+        android:layout_width="37dp"
+        android:layout_height="18dp"
+        android:text="댓글5"
+        android:textColor="#4d000000"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/ccd_tv_view_count"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ccd_tv_like"
+        app:layout_constraintTop_toTopOf="@+id/ccd_tv_like" />
+
+    <TextView
+        android:id="@+id/ccd_tv_view_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="조회수30"
+        android:textColor="#4d000000"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/ccd_img_like"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ccd_tv_reply"
+        app:layout_constraintTop_toTopOf="@+id/ccd_tv_like" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginTop="15dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ccd_tv_like" />
+</androidx.constraintlayout.widget.ConstraintLayout>

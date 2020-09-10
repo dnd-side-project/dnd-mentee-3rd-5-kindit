@@ -1,9 +1,6 @@
 package com.dnd.kindit.retrofit
 
-import com.dnd.kindit.retrofit.service.AccountService
-import com.dnd.kindit.retrofit.service.CommonService
-import com.dnd.kindit.retrofit.service.EncyclopediaService
-import com.dnd.kindit.retrofit.service.SearchService
+import com.dnd.kindit.retrofit.service.*
 import com.dnd.kindit.util.CommonUtils
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
@@ -49,5 +46,13 @@ class RetrofitClient{
             return retrofit.create(EncyclopediaService::class.java)
         }
 
+        fun kindItCommunityService(): CommunityService {
+            val gson = GsonBuilder().setLenient().create()
+            retrofit = Retrofit.Builder()
+                .baseUrl(CommonUtils.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build()
+            return retrofit.create(CommunityService::class.java)
+        }
     }
 }
