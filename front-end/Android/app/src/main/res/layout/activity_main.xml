@@ -14,9 +14,9 @@
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:headerLayout="@layout/header"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        app:headerLayout="@layout/header"
         app:menu="@menu/menu_hamburger" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +26,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
             android:minHeight="?attr/actionBarSize"
@@ -41,30 +41,29 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:paddingBottom="56dp"
-            app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+            app:layout_constraintBottom_toBottomOf="@+id/bottomNavigation"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
-            android:theme="@style/BottomTheme"
-            android:layout_height="56dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:background="@android:color/white"
             android:elevation="16dp"
+            android:theme="@style/BottomTheme"
             app:itemIconSize="28dp"
             app:itemIconTint="@drawable/menu_selector_color"
-            app:itemTextColor="@drawable/menu_selector_color"
+            app:itemRippleColor="@android:color/transparent"
             app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
             app:itemTextAppearanceInactive="@style/BottomNavigationView"
-            android:background="@android:color/white"
-            app:itemRippleColor="@android:color/transparent"
+            app:itemTextColor="@drawable/menu_selector_color"
             app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contentContainer"
             app:menu="@menu/menu_bottomnavigation" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

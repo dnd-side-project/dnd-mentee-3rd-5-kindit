@@ -59,28 +59,18 @@ class CommunityWriteActivity : AppCompatActivity() {
 
             val content = RequestBody.create(
                 MediaType.parse("application/json"),
-                cw_edt_text.text.toString())
-
-            // multipart/form-data
-            val reqFile = RequestBody.create(
-                MediaType.parse("upload_image"),
-                tempFile!!
-            )
-            val imageFile = MultipartBody.Part.createFormData(
-                "upload_image",
-                tempFile!!.name,
-                reqFile
+                cw_edt_text.text.toString()
             )
 
-
-            var uploadCall : Call<CommonResponse>
-            uploadCall =  if (tempFile != null) {
+            val uploadCall: Call<CommonResponse>
+            uploadCall = if (tempFile != null) {
+                val imageFile = MultipartBody.Part.createFormData("upload_image", tempFile!!.name, RequestBody.create(MediaType.parse("upload_image"), tempFile!!))
                 uploadService.uploadPost1(token, content, imageFile)
-            } else {
+            }else{
                 uploadService.uploadPost2(token, content)
             }
 
-            uploadCall.enqueue(object  : retrofit2.Callback<CommonResponse>{
+            uploadCall.enqueue(object : retrofit2.Callback<CommonResponse> {
                 override fun onFailure(call: Call<CommonResponse>, t: Throwable) {
                     Log.e(TAG, t.message.toString())
                 }
@@ -89,7 +79,11 @@ class CommunityWriteActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
                         if (responseBody?.result == "success") {
-                            Toast.makeText(applicationContext, responseBody.message, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                applicationContext,
+                                responseBody.message,
+                                Toast.LENGTH_SHORT
+                            ).show()
                             finish()
                         }
                     } else {
@@ -101,6 +95,9 @@ class CommunityWriteActivity : AppCompatActivity() {
                 }
 
             })
+        }
+        cw_btn_back.setOnClickListener {
+            finish()
         }
     }
 
@@ -154,6 +151,7 @@ class CommunityWriteActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 Toast.makeText(this, "이미지 처리중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
                 Log.e(TAG, e.message.toString())
+                Log.e(TAG + "test", e.message.toString())
             } finally {
                 cursor?.close()
             }
