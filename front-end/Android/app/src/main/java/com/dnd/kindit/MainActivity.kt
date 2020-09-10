@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if (responseBody?.result == "success") {
-                        tv_profileName.text = "${responseBody.user.nickname}님"
+                        tv_profileName?.text = "${responseBody.user.nickname}님"
                     }
                 } else {
                     val responseErrorBody = GsonBuilder().create()

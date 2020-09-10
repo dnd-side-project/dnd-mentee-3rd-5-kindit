@@ -73,5 +73,9 @@ class CommunityFragment : Fragment() {
         fc_btn_write.setOnClickListener {
             startActivity(Intent(this.activity, CommunityWriteActivity::class.java))
         }
+        fc_ssrfl.setOnRefreshListener {
+            fc_ssrfl.isRefreshing = false
+            communityViewModel.getCommunityList(this.context!!)
+        }
     }
 }

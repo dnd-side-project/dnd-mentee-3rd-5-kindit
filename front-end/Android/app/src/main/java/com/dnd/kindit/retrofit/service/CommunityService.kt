@@ -30,6 +30,7 @@ interface CommunityService{
         @Part upload_image: MultipartBody.Part
     ): Call<CommonResponse>
 
+    @Multipart
     @POST("api/community/")
     fun uploadPost2(
         @Header("Authorization") token: String,
