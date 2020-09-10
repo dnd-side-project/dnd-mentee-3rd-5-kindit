@@ -2,15 +2,15 @@ package com.dnd.kindit.arch.model
 
 class CommunityItem {
     var id: Int = 0
-    var nickname: String = ""
+    var nickname: String? = ""
     var content: String = ""
-    var menuPic: String = ""
+    var menuPic: String? = ""
     var date: String = ""
     var lickCount: Int = 0
     var replyCount: Int = 0
     var viewCount: Int = 0
 
-    constructor(id: Int, nickname: String, content: String, menuPic: String, date: String, lickCount: Int, replyCount: Int, viewCount: Int) {
+    constructor(id: Int, nickname: String?, content: String, menuPic: String?, date: String, lickCount: Int, replyCount: Int, viewCount: Int) {
         this.id = id
         this.nickname = nickname
         this.content = content

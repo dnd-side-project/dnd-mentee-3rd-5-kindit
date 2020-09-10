@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
 
         // 소셜로 로그인 버튼
         login_btn_social.setOnClickListener {
-            Snackbar.make(contentContainer, "제작중인 서비스입니다 TT", Snackbar.LENGTH_SHORT).setAction("확인"){
+            Snackbar.make(l_ll_main, "제작중인 서비스입니다 TT", Snackbar.LENGTH_SHORT).setAction("확인"){
             }.show()
         }
     }

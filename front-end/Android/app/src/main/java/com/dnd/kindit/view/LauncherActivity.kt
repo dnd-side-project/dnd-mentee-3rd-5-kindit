@@ -28,12 +28,12 @@ class LauncherActivity : AppCompatActivity() {
     private fun loading() {
         Handler().postDelayed({
             // 추후 LoginActivity 로 이동
-//            val intent = Intent(this, LoginActivity::class.java)
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
+//            val intent = Intent(this, MainActivity::class.java)
 //            val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
-        }, 200)
+        }, 1500)
     }
 }

@@ -28,7 +28,7 @@ class CommunityViewModel : ViewModel() {
         val token = PreferenceManager.getString(context, "kindit_token").toString()
 
         val communityService = RetrofitClient.kindItCommunityService()
-        val communityCall = communityService.getCommunityList("jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6Im1zbm8yQG5hdmVyLmNvbSIsImV4cCI6MTYwMDI2MjAxNCwiZW1haWwiOiJtc25vMkBuYXZlci5jb20iLCJvcmlnX2lhdCI6MTU5OTY1NzIxNH0.huecbUN9PLspgQ9p1oGBzqWXbTzPU972ftdVKSl_EEs")
+        val communityCall = communityService.getCommunityList(token)
 
         communityCall.enqueue(object : retrofit2.Callback<CommunityItemsResponse>{
             override fun onFailure(call: Call<CommunityItemsResponse>, t: Throwable) {
